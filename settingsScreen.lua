@@ -24,6 +24,7 @@ backToPreviousButton:scale(.5, .5)
 settingsGroup:toBack()
 
 function backToPrevious(event)
+	splashGroup.isVisible = true
 	settingsGroup.isVisible = false
 	return true
 end

@@ -96,8 +96,9 @@ function settingsTouched(event)
 end
 
 function showDpad()
-	inGameSettings = display.newImage( "assets/UI/settingsInGame.png", 0, 26 )
+	inGameSettings = display.newImage( "assets/UI/settingsInGame.png", 0, 22 )
 	dpad = display.newImage("assets/Controller/dpad.png", 20, CONTENT_HEIGHT - 64)
+	inGameSettings:scale(.5, .5)
 	-- dpad:scale(scale, scale)
 	dpad:addEventListener( "touch", dpadTouched )
 	inGameSettings:addEventListener( "tap", settingsTouched )
@@ -107,7 +108,8 @@ function showDpad()
 end
 
 function useKeyboard()
-	inGameSettings = display.newImage( "assets/UI/settingsInGame.png", 0, 26 )
+	inGameSettings = display.newImage( "assets/UI/settingsInGame.png", 0, 22 )
+	inGameSettings:scale(.5, .5)
 	inGameSettings:addEventListener( "tap", settingsTouched )
 	Runtime:addEventListener( "key", keyboardTouched )
 	player:setSequence("idleDown")

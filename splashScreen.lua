@@ -11,7 +11,7 @@ local player = require("player")
 local settingsScreen = require("settingsScreen")
 local soundTable = require("soundTable")
 
-local splashGroup = display.newGroup()
+splashGroup = display.newGroup()
 
 local background = display.newImageRect( splashGroup, "assets/Backgrounds/LandOfLerocia.jpeg", CONTENT_WIDTH, CONTENT_HEIGHT )
 background.x = display.contentCenterX
@@ -47,6 +47,7 @@ function openSettings(event)
 	-- newGame.isVisible = false
 	-- loadGame.isVisible = false
 	-- settings.isVisible = false
+	splashGroup.isVisible = false
 	settingsScreen.settingsGroup.isVisible = true
 	settingsScreen.settingsGroup:toFront()
 end
