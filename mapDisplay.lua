@@ -7,8 +7,8 @@
 map = require("GameMap")
 local mapImages = display.newGroup()
 local physics = require("physics")
+local loadBar = require("loadBar")
 physics.start( )
-local frameNum = 1
 
 local function getTileInSet(setIndex, tileIndex)
 	tileIndex = tileIndex - map.tilesets[setIndex].firstgid
@@ -36,10 +36,9 @@ local function getTileForIndex(index)
 	return nil
 end
 
+
 for layerIndex = 1, #map.layers do
 	-- print("Printing layer: " .. map.layers[layerIndex].name)
-  -- loadIcon:setFrame(frameNum)
-  -- frameNum = frameNum + 1
 	layer = map.layers[layerIndex]
 	for y = 1, layer.height do
 		for x = 1, layer.width do
@@ -47,11 +46,13 @@ for layerIndex = 1, #map.layers do
 			tile = getTileForIndex(layer.data[index])
 			if (tile ~= nil) then
 				tileImage = display.newImage(tile.image, (tile.width*(x)*scale), (tile.height*(y)*scale))
+        tileImage:scale(scale, scale)
+        local nw, nh = tileImage.width*scale*0.5, tileImage.height*scale*0.5;
         if (layer.name == "Tree and Fence Border Layer") then
-         print("adding physics body to layer")
-         physics.addBody( tileImage, "static", { friction=0, bounce=0 } )
+         print("adding physics body to "..tile.image)
+         tileImage.type = "physics"
+         physics.addBody( tileImage, "static", { desnity=1.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )
         end
-				tileImage:scale(scale, scale)
 				mapImages:insert(tileImage)
 			end
 		end

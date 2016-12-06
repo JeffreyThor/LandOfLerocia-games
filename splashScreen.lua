@@ -9,6 +9,7 @@ local splashTable = {}
 --local mapImages = require("mapDisplay")
 local player = require("player")
 local settingsScreen = require("settingsScreen")
+local soundTable = require("soundTable")
 
 local splashGroup = display.newGroup()
 
@@ -16,6 +17,9 @@ local background = display.newImageRect( splashGroup, "assets/Backgrounds/LandOf
 background.x = display.contentCenterX
 background.y = display.contentCenterY
 background.xScale = 1.2
+
+audio.play(soundTable["TitleTheme"], {loops = -1})
+
 local newGame = display.newImage( splashGroup, "assets/UI/newGameButton.png", CONTENT_WIDTH/2, CONTENT_HEIGHT*(1/4) + 40 )
 local loadGame  = display.newImage( splashGroup, "assets/UI/loadGameButton.png", CONTENT_WIDTH/2, CONTENT_HEIGHT*(2/4) + 40 )
 local settings  = display.newImage( splashGroup, "assets/UI/settingsButton.png", CONTENT_WIDTH/2, CONTENT_HEIGHT*(3/4) + 40 )
@@ -28,9 +32,11 @@ transition.fadeIn( loadGame, { delay = 2000, time=2000 } )
 transition.fadeIn( settings, { delay = 2000, time=2000 } )
 
 function startNewGame(event)
+	audio.stop()
 	transition.fadeOut( splashGroup, {time = 2000} )
-	--showDpad()
-	useKeyboard()
+	audio.play(soundTable["OpeningDemo"], {loops = -1})
+	showDpad()
+	--useKeyboard()
 end
 
 function findLoadGame(event)

@@ -5,6 +5,9 @@
 -----------------------------------------------------------------------------------------
 
 local physics = require("physics")
+local gameMap = require("gameMap")
+physics.start( )
+physics.setDrawMode( "hybrid" )
 
 local options = {
    width = 326,
@@ -74,13 +77,22 @@ local sequenceData = {
 	}
 }
 
-physics.start( )
+local function onLocalCollision(event)
+	print("collision")
+    if(event.other.type == "physics") then
+    	transition.pause()
+    	print("collison has occured pauseing tran")
+    end 
+end
 
 local player = display.newSprite(spriteSheet, sequenceData)
-physics.addBody( player, "static", {friction=0, bounce=0} )
+player:scale(scale, scale)
+local nw, nh = gameMap.tilewidth*scale*0.5, gameMap.tileheight*scale*0.5;
+physics.addBody( player, "static", {density=1.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh}} )
 player.x = CONTENT_WIDTH/2;
 player.y = CONTENT_HEIGHT/2;
-player:scale(scale, scale)
 player.scale = scale
+player.collision = onLocalCollision
+Runtime:addEventListener( "collision", onLocalCollision )
 
 return player

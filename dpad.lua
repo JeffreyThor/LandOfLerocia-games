@@ -7,9 +7,11 @@
 local mapImages = require("mapDisplay")
 local player = require("player")
 local settingsScreen = require("settingsScreen")
+local soundTable = require("soundTable")
 local dpadAction = nil
 local activeAction = nil
 local inGameSettings
+local dpad
 
 function movePlayer()
 	activeAction = dpadAction
@@ -28,7 +30,7 @@ function movePlayer()
 	end
 	player:setSequence(dpadAction)
 	player:play()
-
+	audio.play(soundTable["Walk"])
 	transition.to(mapImages, {time = player.speed, x = (mapImages.x - (xAmount * scale)), y = (mapImages.y - (yAmount * scale)),
 		onComplete = function()
 			if (activeAction == "moveRight") then
@@ -95,9 +97,10 @@ end
 
 function showDpad()
 	inGameSettings = display.newImage( "assets/UI/settingsInGame.png", 0, 26 )
-	local dpad = display.newImage("assets/Controller/Movement.png", 0, CONTENT_HEIGHT - 50)
-	dpad:scale(scale, scale)
+	dpad = display.newImage("assets/Controller/dpad.png", 20, CONTENT_HEIGHT - 64)
+	-- dpad:scale(scale, scale)
 	dpad:addEventListener( "touch", dpadTouched )
+	inGameSettings:addEventListener( "tap", settingsTouched )
 	player:setSequence("idleDown")
 	player:play()
 	player:toFront( )
