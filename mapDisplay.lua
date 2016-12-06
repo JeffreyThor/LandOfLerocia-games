@@ -36,7 +36,6 @@ local function getTileForIndex(index)
 	return nil
 end
 
-
 for layerIndex = 1, #map.layers do
 	-- print("Printing layer: " .. map.layers[layerIndex].name)
 	layer = map.layers[layerIndex]
@@ -50,8 +49,8 @@ for layerIndex = 1, #map.layers do
         local nw, nh = tileImage.width*scale*0.5, tileImage.height*scale*0.5;
         if (layer.name == "Tree and Fence Border Layer") then
          print("adding physics body to "..tile.image)
-         tileImage.type = "physics"
          physics.addBody( tileImage, "static", { desnity=1.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )
+         tileImage.myName = "object"
         end
 				mapImages:insert(tileImage)
 			end
