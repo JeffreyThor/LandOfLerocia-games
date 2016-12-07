@@ -4,7 +4,7 @@
 --
 -----------------------------------------------------------------------------------------
 
-local gameMap = require("gameMap")
+-- local map = require("map")
 physics.setDrawMode( "hybrid" )
 
 local options = {
@@ -84,7 +84,7 @@ local sequenceData = {
 
 local player = display.newSprite(spriteSheet, sequenceData)
 player:scale(scale, scale)
-local nw, nh = gameMap.tilewidth*scale*0.5, gameMap.tileheight*scale*0.5;
+local nw, nh = map.tilewidth*scale*0.5, map.tileheight*scale*0.5;
 physics.addBody( player, "dynamic", {density=0.0,friction=0.0, bounce=0.0, shape={-nw,-nh+10,nw,-nh+10,nw,nh+10,-nw,nh+10}} )
 player.x = CONTENT_WIDTH/2;
 player.y = CONTENT_HEIGHT/2;

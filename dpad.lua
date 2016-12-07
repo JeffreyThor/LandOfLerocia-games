@@ -4,10 +4,10 @@
 --
 -----------------------------------------------------------------------------------------
 
-local mapImages = require("mapDisplay")
-local player = require("player")
-local settingsScreen = require("settingsScreen")
-local soundTable = require("soundTable")
+-- local mapDisplay = require("mapDisplay")
+-- local player = require("player")
+-- local settingsScreen = require("settingsScreen")
+-- local soundTable = require("soundTable")
 local dpadAction = nil
 local activeAction = nil
 local inGameSettings
@@ -39,7 +39,7 @@ function movePlayer()
 	player:addEventListener( "collision", playerCollided )
 	audio.play(soundTable["Walk"])
 	transition.to(player, {time=player.speed, x = (player.x+(xAmount*scale)),y=(player.y+(yAmount*scale))})
-	transition.to(mapImages, {time = player.speed, x = (mapImages.x - (xAmount * scale)), y = (mapImages.y - (yAmount * scale)),
+	transition.to(mapDisplay, {time = player.speed, x = (mapDisplay.x - (xAmount * scale)), y = (mapDisplay.y - (yAmount * scale)),
 		onComplete = function()
 			if (activeAction == "moveRight") then
 				player:setSequence("idleRight")
@@ -103,7 +103,8 @@ function settingsTouched(event)
 	dpadGroup.isVisible = false
 	gameSettings.isVisible = false
 	settingsScreen.settingsGroup.isVisible = true
-	settingsScreen.settingsGroup:toFront()
+	settingsScreen.background.isVisible = true
+	-- settingsScreen.settingsGroup:toFront()
 end
 
 function useDpad()

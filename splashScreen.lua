@@ -7,11 +7,11 @@
 local splashTable = {}
 
 --local mapImages = require("mapDisplay")
-local player = require("player")
-local settingsScreen = require("settingsScreen")
-local optionsScreen = require("optionsScreen")
-local controlsScreen = require("controlsScreen")
-local soundTable = require("soundTable")
+-- local player = require("player")
+-- local settingsScreen = require("settingsScreen")
+-- local optionsScreen = require("optionsScreen")
+-- local controlsScreen = require("controlsScreen")
+-- local soundTable = require("soundTable")
 
 splashGroup = display.newGroup()
 
@@ -34,14 +34,14 @@ transition.fadeIn( loadGame, { delay = 2000, time=2000 } )
 transition.fadeIn( settings, { delay = 2000, time=2000 } )
 
 function startNewGame(event)
-	audio.stop( 1 )
+	audio.stop(1)
 	transition.fadeOut( splashGroup, {time = 2000} )
 	settingsScreen.settingsGroup.isVisible = false
 	settingsScreen.saveButton.isVisible = true
 	settingsScreen.quitButton.isVisible = true
 	settingsScreen.creditsButton.isVisible = false
-	optionsScreen.optionsGroup.isVisible = false
-	controlsScreen.controlsGroup.isVisible = false
+	-- optionsScreen.optionsGroup.isVisible = false
+	-- controlsScreen.controlsGroup.isVisible = false
 	audio.play(soundTable["OpeningDemo"], {loops = -1})
 	-- settingsScreen.creditsButton.isVisible = false
 	-- settingsScreen.saveButton.isVisible = true
@@ -62,8 +62,13 @@ function openSettings(event)
 	dpadGroup.isVisible = false
 	gameSettings.isVisible = false
 	splashGroup.isVisible = false
+	settingsScreen.background.isVisible = true
 	settingsScreen.settingsGroup.isVisible = true
-	settingsScreen.settingsGroup:toFront()
+	-- settingsScreen.background:toFront()
+	-- settingsScreen.settingsGroup:toFront()
+	-- settingsScreen.optionsGroup:toFront()
+	-- settingsScreen.controlsGroup:toFront()
+	-- settingsScreen.creditsGroup:toFront()
 	return true
 end
 
@@ -75,5 +80,6 @@ splashTable.splashGroup = splashGroup
 splashTable.startNewGame = startNewGame
 splashTable.findLoadGame = findLoadGame
 splashTable.openSettings = openSettings
+splashTable.settingsScreen = settingsScreen
 
 return splashTable
