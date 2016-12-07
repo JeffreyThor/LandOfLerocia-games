@@ -80,7 +80,6 @@ local sequenceData = {
 local function onLocalCollision(event)
 	print("collision")
     if(event.other.type == "object") then
-    	transition.pause()
     	print("collison has occured pauseing tran")
     end 
 end

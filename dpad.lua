@@ -12,6 +12,8 @@ local dpadAction = nil
 local activeAction = nil
 local inGameSettings
 local dpad
+dpadGroup = display.newGroup( )
+gameSettings = display.newGroup( )
 
 function movePlayer()
 	activeAction = dpadAction
@@ -91,13 +93,16 @@ local function keyboardTouched(event)
 end
 
 function settingsTouched(event)
+	dpadGroup.isVisible = false
+	gameSettings.isVisible = false
 	settingsScreen.settingsGroup.isVisible = true
 	settingsScreen.settingsGroup:toFront()
 end
 
-function showDpad()
-	inGameSettings = display.newImage( "assets/UI/settingsInGame.png", 0, 22 )
-	dpad = display.newImage("assets/Controller/dpad.png", 20, CONTENT_HEIGHT - 64)
+function useDpad()
+	dpadGroup.isVisible = true
+	inGameSettings = display.newImage( dpadGroup, "assets/UI/settingsInGame.png", 0, 22 )
+	dpad = display.newImage(dpadGroup, "assets/Controller/dpad.png", 20, CONTENT_HEIGHT - 64)
 	inGameSettings:scale(.5, .5)
 	-- dpad:scale(scale, scale)
 	dpad:addEventListener( "touch", dpadTouched )
@@ -108,7 +113,9 @@ function showDpad()
 end
 
 function useKeyboard()
-	inGameSettings = display.newImage( "assets/UI/settingsInGame.png", 0, 22 )
+	dpadGroup.isVisible = false
+	gameSettings.isVisible = true
+	inGameSettings = display.newImage( gameSettings, "assets/UI/settingsInGame.png", 0, 22 )
 	inGameSettings:scale(.5, .5)
 	inGameSettings:addEventListener( "tap", settingsTouched )
 	Runtime:addEventListener( "key", keyboardTouched )

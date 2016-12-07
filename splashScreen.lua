@@ -34,16 +34,19 @@ transition.fadeIn( loadGame, { delay = 2000, time=2000 } )
 transition.fadeIn( settings, { delay = 2000, time=2000 } )
 
 function startNewGame(event)
-	audio.stop()
+	audio.stop( 1 )
 	transition.fadeOut( splashGroup, {time = 2000} )
 	settingsScreen.settingsGroup.isVisible = false
+	settingsScreen.saveButton.isVisible = true
+	settingsScreen.quitButton.isVisible = true
+	settingsScreen.creditsButton.isVisible = false
 	optionsScreen.optionsGroup.isVisible = false
 	controlsScreen.controlsGroup.isVisible = false
 	audio.play(soundTable["OpeningDemo"], {loops = -1})
 	-- settingsScreen.creditsButton.isVisible = false
 	-- settingsScreen.saveButton.isVisible = true
 	-- settingsScreen.quitButton.isVisible = true
-	showDpad()
+	useDpad()
 	--useKeyboard()
 	return true
 end
@@ -56,9 +59,12 @@ function openSettings(event)
 	-- newGame.isVisible = false
 	-- loadGame.isVisible = false
 	-- settings.isVisible = false
+	dpadGroup.isVisible = false
+	gameSettings.isVisible = false
 	splashGroup.isVisible = false
 	settingsScreen.settingsGroup.isVisible = true
 	settingsScreen.settingsGroup:toFront()
+	return true
 end
 
 newGame:addEventListener( "tap", startNewGame )
