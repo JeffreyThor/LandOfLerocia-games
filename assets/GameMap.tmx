@@ -698,7 +698,7 @@
   </tile>
  </tileset>
  <tileset firstgid="230" name="mage city" tilewidth="128" tileheight="128" tilecount="360" columns="8">
-  <image source="../Documents/Git Repositories/LandOfLerocia-games/assets/TileSet/magecity.png" width="1024" height="5800"/>
+  <image source="TileSet/magecity.png" width="1024" height="5800"/>
  </tileset>
  <layer name="Grass Layer" width="100" height="100">
   <data encoding="csv">

@@ -9,6 +9,8 @@ local splashTable = {}
 --local mapImages = require("mapDisplay")
 local player = require("player")
 local settingsScreen = require("settingsScreen")
+local optionsScreen = require("optionsScreen")
+local controlsScreen = require("controlsScreen")
 local soundTable = require("soundTable")
 
 splashGroup = display.newGroup()
@@ -34,9 +36,16 @@ transition.fadeIn( settings, { delay = 2000, time=2000 } )
 function startNewGame(event)
 	audio.stop()
 	transition.fadeOut( splashGroup, {time = 2000} )
+	settingsScreen.settingsGroup.isVisible = false
+	optionsScreen.optionsGroup.isVisible = false
+	controlsScreen.controlsGroup.isVisible = false
 	audio.play(soundTable["OpeningDemo"], {loops = -1})
+	-- settingsScreen.creditsButton.isVisible = false
+	-- settingsScreen.saveButton.isVisible = true
+	-- settingsScreen.quitButton.isVisible = true
 	showDpad()
 	--useKeyboard()
+	return true
 end
 
 function findLoadGame(event)

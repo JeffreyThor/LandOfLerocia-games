@@ -49,8 +49,8 @@ for layerIndex = 1, #map.layers do
         local nw, nh = tileImage.width*scale*0.5, tileImage.height*scale*0.5;
         if (layer.name == "Tree and Fence Border Layer") then
          print("adding physics body to "..tile.image)
-         physics.addBody( tileImage, "static", { desnity=1.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )
-         tileImage.myName = "object"
+         physics.addBody( tileImage, "static", { density=1.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )
+         tileImage.type = "object"
         end
 				mapImages:insert(tileImage)
 			end
