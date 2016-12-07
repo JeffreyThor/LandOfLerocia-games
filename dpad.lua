@@ -15,6 +15,10 @@ local dpad
 dpadGroup = display.newGroup( )
 gameSettings = display.newGroup( )
 
+local function playerCollided(event)
+	print("Collided")
+end
+
 function movePlayer()
 	activeAction = dpadAction
 	local xAmount = 0
@@ -32,7 +36,9 @@ function movePlayer()
 	end
 	player:setSequence(dpadAction)
 	player:play()
+	player:addEventListener( "collision", playerCollided )
 	audio.play(soundTable["Walk"])
+	transition.to(player, {time=player.speed, x = (player.x+(xAmount*scale)),y=(player.y+(yAmount*scale))})
 	transition.to(mapImages, {time = player.speed, x = (mapImages.x - (xAmount * scale)), y = (mapImages.y - (yAmount * scale)),
 		onComplete = function()
 			if (activeAction == "moveRight") then
@@ -44,6 +50,7 @@ function movePlayer()
 			elseif (activeAction == "moveDown") then
 				player:setSequence("idleDown")
 			end
+			player:setLinearVelocity( 0.0, 0.0 )
 			player:play();
 
 			activeAction = nil

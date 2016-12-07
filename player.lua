@@ -4,9 +4,7 @@
 --
 -----------------------------------------------------------------------------------------
 
-local physics = require("physics")
 local gameMap = require("gameMap")
-physics.start( )
 physics.setDrawMode( "hybrid" )
 
 local options = {
@@ -77,21 +75,25 @@ local sequenceData = {
 	}
 }
 
-local function onLocalCollision(event)
-	print("collision")
-    if(event.other.type == "object") then
-    	print("collison has occured pauseing tran")
-    end 
-end
+-- local function onLocalCollision(event)
+-- 	print("collision")
+--     if(event.other.type == "object") then
+--     	print("collison has occured with object")
+--     end
+-- end
 
 local player = display.newSprite(spriteSheet, sequenceData)
 player:scale(scale, scale)
 local nw, nh = gameMap.tilewidth*scale*0.5, gameMap.tileheight*scale*0.5;
-physics.addBody( player, "static", {density=1.0,friction=0.0, bounce=0.0, shape={-nw,-nh+9,nw,-nh+9,nw,nh+9,-nw,nh+9}} )
+physics.addBody( player, "dynamic", {density=0.0,friction=0.0, bounce=0.0, shape={-nw,-nh+10,nw,-nh+10,nw,nh+10,-nw,nh+10}} )
 player.x = CONTENT_WIDTH/2;
 player.y = CONTENT_HEIGHT/2;
+player.isSensor = true
+player.gravityScale = 0
 player.scale = scale
-player.collision = onLocalCollision
-Runtime:addEventListener( "collision", onLocalCollision )
+player.isSleepingAllowed = false
+player.isAwake = true
+-- player.collision = onLocalCollision
+-- player:addEventListener( "collision", onLocalCollision )
 
 return player
