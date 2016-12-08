@@ -8,14 +8,22 @@ local dpadTable = {}
 
 local dpadGroup = display.newGroup( )
 local gameSettings = display.newGroup( )
+local characterGroup = display.newGroup( )
 
 local dpadAction = nil
 local activeAction = nil
 local inGameSettings = display.newImage( dpadGroup, "assets/UI/settingsInGame.png", 0, 22 )
+local characterDisplayButton = display.newImage( dpadGroup, "assets/UI/characterImage.png", 50, 22 )
 inGameSettings:scale(.5, .5)
 inGameSettings.isVisible = false
+characterDisplayButton:scale( .5, .5 )
+characterDisplayButton.isVisible = false
 local dpad = display.newImage(dpadGroup, "assets/Controller/dpad.png", 20, CONTENT_HEIGHT - 64)
 dpad.isVisible = false
+local characterDisplay = display.newImage( characterGroup, "assets/UI/CharacterScreen.png", CONTENT_WIDTH/2, CONTENT_HEIGHT/2 )
+local closeCharacterDisplayButton = display.newImage( characterGroup, "assets/UI/closeButton.png", CONTENT_WIDTH/2 - characterDisplay.width/2 + 35, CONTENT_HEIGHT/2 - characterDisplay.height/2 + 35 )
+closeCharacterDisplayButton:scale(.5, .5)
+characterGroup.isVisible = false
 
 local function playerCollided(event)
 	print("Collided")
@@ -107,8 +115,21 @@ local function settingsTouched(event)
 	settingsScreen.background.isVisible = true
 end
 
+local function characterDisplayButtonTouched()
+	dpadGroup.isVisible = false
+	gameSettings.isVisible = false
+	characterGroup.isVisible = true
+end
+
+local function closeCharacterDisplay()
+	dpadGroup.isVisible = true
+	gameSettings.isVisible = true
+	characterGroup.isVisible = false
+end
+
 local function useDpad()
 	inGameSettings.isVisible = true
+	characterDisplayButton.isVisible = true
 	dpad.isVisible = true
 	dpadGroup.isVisible = true
 	player:setSequence("idleDown")
@@ -121,6 +142,7 @@ local function useKeyboard()
 	dpadGroup.isVisible = true
 	gameSettings.isVisible = true
 	inGameSettings.isVisible = true
+	characterDisplayButton.isVisible = true
 	Runtime:addEventListener( "key", keyboardTouched )
 	player:setSequence("idleDown")
 	player:play()
@@ -129,12 +151,15 @@ end
 
 dpad:addEventListener( "touch", dpadTouched )
 inGameSettings:addEventListener( "tap", settingsTouched )
+characterDisplayButton:addEventListener( "tap", characterDisplayButtonTouched )
+closeCharacterDisplayButton:addEventListener( "tap", closeCharacterDisplay )
 
 dpadTable.settingsTouched = settingsTouched
 dpadTable.useDpad = useDpad
 dpadTable.useKeyboard = useKeyboard
 dpadTable.gameSettings = gameSettings
 dpadTable.inGameSettings = inGameSettings
+dpadTable.characterDisplayButton = characterDisplayButton
 dpadTable.dpadGroup = dpadGroup
 dpadTable.dpad = dpad
 
