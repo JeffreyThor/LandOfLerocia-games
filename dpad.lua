@@ -24,15 +24,49 @@ local characterDisplay = display.newImage( characterGroup, "assets/UI/CharacterS
 local closeCharacterDisplayButton = display.newImage( characterGroup, "assets/UI/closeButton.png", CONTENT_WIDTH/2 - characterDisplay.width/2 + 35, CONTENT_HEIGHT/2 - characterDisplay.height/2 + 35 )
 closeCharacterDisplayButton:scale(.5, .5)
 characterGroup.isVisible = false
+local currentPlayerX = player.x
+local currentPlayerY = player.y
+local currentMapX = mapDisplay.x
+local currentMapY = mapDisplay.y
 
-local function playerCollided(event)
-	print("Collided")
+function playerCollided(event) 
+	timer.performWithDelay(1, 
+		function() 
+			return resetPosition(event) 
+		end)
+end
+function resetPosition(event)  
+	transition.cancel(player)
+	transition.cancel(mapDisplay)
+	mapDisplay.x = currentMapX
+	mapDisplay.y = currentMapY
+	player.x=currentPlayerX  
+	player.y=currentPlayerY
+	if (activeAction == "moveRight") then
+		player:setSequence("idleRight")
+	elseif (activeAction == "moveLeft") then
+		player:setSequence("idleLeft")
+	elseif (activeAction == "moveUp") then
+		player:setSequence("idleUp")
+	elseif (activeAction == "moveDown") then
+		player:setSequence("idleDown")
+	end
+	player:play()
+	activeAction = nil
 end
 
 function movePlayer()
 	activeAction = dpadAction
 	local xAmount = 0
 	local yAmount = 0
+	currentPlayerX = player.x
+	currentPlayerY = player.y
+	print("player x:"..player.x)
+	print("player y:"..player.y)
+	print("map x:"..mapDisplay.x)
+	print("map y"..mapDisplay.y)
+	currentMapX = mapDisplay.x
+	currentMapY = mapDisplay.y
 	if (dpadAction == nil) then
 		return true
 	elseif (dpadAction == "moveRight") then
@@ -60,7 +94,6 @@ function movePlayer()
 			elseif (activeAction == "moveDown") then
 				player:setSequence("idleDown")
 			end
-			-- player:setLinearVelocity( 0.0, 0.0 )
 			player:play();
 			activeAction = nil
 			movePlayer()

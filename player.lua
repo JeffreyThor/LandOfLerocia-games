@@ -4,7 +4,7 @@
 --
 -----------------------------------------------------------------------------------------
 
--- physics.setDrawMode( "hybrid" )
+physics.setDrawMode( "hybrid" )
 
 local options = {
    width = 326,
@@ -77,7 +77,7 @@ local sequenceData = {
 local player = display.newSprite(spriteSheet, sequenceData)
 player:scale(scale, scale)
 local nw, nh = map.tilewidth*scale*0.5, map.tileheight*scale*0.5;
-physics.addBody( player, "dynamic", {density=0.0,friction=0.0, bounce=0.0, shape={-nw,-nh+10,nw,-nh+10,nw,nh+10,-nw,nh+10}} )
+physics.addBody( player, "dynamic", {density=0.0,friction=0.0, bounce=0.0, shape={-nw+2,-nh+12,nw-2,-nh+12,nw-2,nh+8,-nw+2,nh+8}} )
 player.x = CONTENT_WIDTH/2;
 player.y = CONTENT_HEIGHT/2;
 player.isSensor = true
