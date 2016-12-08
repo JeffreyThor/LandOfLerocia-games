@@ -4,7 +4,7 @@
 --
 -----------------------------------------------------------------------------------------
 
-map = require("GameMap")
+map = require("GameMap2")
 local mapImages = display.newGroup()
 
 local function getTileInSet(setIndex, tileIndex)
@@ -44,7 +44,7 @@ for layerIndex = 1, #map.layers do
 				tileImage = display.newImage(tile.image, (tile.width*(x)*scale), (tile.height*(y)*scale))
         		tileImage:scale(scale, scale)
         		local nw, nh = tileImage.width*scale*0.5, tileImage.height*scale*0.5;
-        		if (layer.name == "Tree and Fence Border Layer") then
+        		if (layer.name == "Object Layer 1") then
          			physics.addBody( tileImage, "static", { density=0.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )
          			-- tileImage.isSleepingAllowed = false
          			-- tileImage.isAwake = true

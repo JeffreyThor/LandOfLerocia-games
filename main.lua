@@ -6,6 +6,8 @@
 
 CONTENT_WIDTH = display.contentWidth
 CONTENT_HEIGHT = display.contentHeight
+local playerStartX = 15
+local playerStartY = 10
 scale = .3
 physics = require("physics")
 physics.start(true)
@@ -20,8 +22,7 @@ splashScreen.splashGroup.isVisible = true
 settingsScreen.settingsGroup.isVisible = false
 settingsScreen.background.isVisible = false
 mapDisplay:insert(player)
-mapDisplay.x = player.x - map.tilewidth * 17 * scale
-mapDisplay.y = player.y - map.tileheight * 39 * scale - (map.tileheight / 1.3 * scale)
-player.x = 0 + map.tilewidth * 17 * scale
-player.y = 0 + map.tileheight * 40 * scale - map.tileheight/4 * scale
-player.speed = 500
+mapDisplay.x = player.x - map.tilewidth * playerStartX * scale
+mapDisplay.y = player.y - map.tileheight * playerStartY * scale - (map.tileheight / 1.3 * scale)
+player.x = 0 + map.tilewidth * playerStartX * scale
+player.y = 0 + map.tileheight * (playerStartY+1) * scale - map.tileheight/4 * scale

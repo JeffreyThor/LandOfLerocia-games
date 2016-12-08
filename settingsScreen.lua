@@ -107,7 +107,7 @@ local function credits()
 	settingsGroup.isVisible = false
 	creditsGroup.isVisible = true
 	creditsToSettingsButton.isVisible = true
-	creditsGroup.y = creditsGroup.height/2+40
+	creditsGroup.y = creditsGroup.height/4
 	transition.to( creditsGroup, {time=20000, y=-creditsGroup.height-40, 
 		onComplete = function()
 			audio.stop(1)

@@ -83,6 +83,7 @@ player.y = CONTENT_HEIGHT/2;
 player.isSensor = true
 player.gravityScale = 0
 player.scale = scale
+player.speed = 500
 -- player.isSleepingAllowed = false
 -- player.isAwake = true
 
