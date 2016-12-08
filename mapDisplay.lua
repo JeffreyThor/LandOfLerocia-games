@@ -4,7 +4,7 @@
 --
 -----------------------------------------------------------------------------------------
 
-map = require("GameMap2")
+map = require("GameMap")
 local mapImages = display.newGroup()
 
 local function getTileInSet(setIndex, tileIndex)

@@ -4,7 +4,7 @@
 --
 -----------------------------------------------------------------------------------------
 
-physics.setDrawMode( "hybrid" )
+-- physics.setDrawMode( "hybrid" )
 
 local options = {
    width = 326,

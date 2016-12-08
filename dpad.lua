@@ -29,9 +29,9 @@ local currentPlayerY = player.y
 local currentMapX = mapDisplay.x
 local currentMapY = mapDisplay.y
 
-function playerCollided(event) 
+function playerCollided(event)
 	timer.performWithDelay(1, 
-		function() 
+		function()
 			return resetPosition(event) 
 		end)
 end
@@ -61,10 +61,6 @@ function movePlayer()
 	local yAmount = 0
 	currentPlayerX = player.x
 	currentPlayerY = player.y
-	print("player x:"..player.x)
-	print("player y:"..player.y)
-	print("map x:"..mapDisplay.x)
-	print("map y"..mapDisplay.y)
 	currentMapX = mapDisplay.x
 	currentMapY = mapDisplay.y
 	if (dpadAction == nil) then
