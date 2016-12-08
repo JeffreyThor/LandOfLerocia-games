@@ -6,13 +6,6 @@
 
 local splashTable = {}
 
---local mapImages = require("mapDisplay")
--- local player = require("player")
--- local settingsScreen = require("settingsScreen")
--- local optionsScreen = require("optionsScreen")
--- local controlsScreen = require("controlsScreen")
--- local soundTable = require("soundTable")
-
 splashGroup = display.newGroup()
 
 local background = display.newImageRect( splashGroup, "assets/Backgrounds/LandOfLerocia.jpeg", CONTENT_WIDTH, CONTENT_HEIGHT )
@@ -40,14 +33,9 @@ function startNewGame(event)
 	settingsScreen.saveButton.isVisible = true
 	settingsScreen.quitButton.isVisible = true
 	settingsScreen.creditsButton.isVisible = false
-	-- optionsScreen.optionsGroup.isVisible = false
-	-- controlsScreen.controlsGroup.isVisible = false
 	audio.play(soundTable["OpeningDemo"], {loops = -1})
-	-- settingsScreen.creditsButton.isVisible = false
-	-- settingsScreen.saveButton.isVisible = true
-	-- settingsScreen.quitButton.isVisible = true
-	useDpad()
-	--useKeyboard()
+	dpad.useDpad()
+	--dpad.useKeyboard()
 	return true
 end
 
@@ -56,19 +44,11 @@ function findLoadGame(event)
 end
 
 function openSettings(event)
-	-- newGame.isVisible = false
-	-- loadGame.isVisible = false
-	-- settings.isVisible = false
-	dpadGroup.isVisible = false
-	gameSettings.isVisible = false
+	dpad.dpadGroup.isVisible = false
+	dpad.gameSettings.isVisible = false
 	splashGroup.isVisible = false
 	settingsScreen.background.isVisible = true
 	settingsScreen.settingsGroup.isVisible = true
-	-- settingsScreen.background:toFront()
-	-- settingsScreen.settingsGroup:toFront()
-	-- settingsScreen.optionsGroup:toFront()
-	-- settingsScreen.controlsGroup:toFront()
-	-- settingsScreen.creditsGroup:toFront()
 	return true
 end
 

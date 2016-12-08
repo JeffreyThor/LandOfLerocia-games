@@ -4,16 +4,18 @@
 --
 -----------------------------------------------------------------------------------------
 
--- local mapDisplay = require("mapDisplay")
--- local player = require("player")
--- local settingsScreen = require("settingsScreen")
--- local soundTable = require("soundTable")
+local dpadTable = {}
+
+local dpadGroup = display.newGroup( )
+local gameSettings = display.newGroup( )
+
 local dpadAction = nil
 local activeAction = nil
-local inGameSettings
-local dpad
-dpadGroup = display.newGroup( )
-gameSettings = display.newGroup( )
+local inGameSettings = display.newImage( dpadGroup, "assets/UI/settingsInGame.png", 0, 22 )
+inGameSettings:scale(.5, .5)
+inGameSettings.isVisible = false
+local dpad = display.newImage(dpadGroup, "assets/Controller/dpad.png", 20, CONTENT_HEIGHT - 64)
+dpad.isVisible = false
 
 local function playerCollided(event)
 	print("Collided")
@@ -50,9 +52,8 @@ function movePlayer()
 			elseif (activeAction == "moveDown") then
 				player:setSequence("idleDown")
 			end
-			player:setLinearVelocity( 0.0, 0.0 )
+			-- player:setLinearVelocity( 0.0, 0.0 )
 			player:play();
-
 			activeAction = nil
 			movePlayer()
 		end
@@ -99,39 +100,44 @@ local function keyboardTouched(event)
 	end
 end
 
-function settingsTouched(event)
+local function settingsTouched(event)
 	dpadGroup.isVisible = false
 	gameSettings.isVisible = false
 	settingsScreen.settingsGroup.isVisible = true
 	settingsScreen.background.isVisible = true
-	-- settingsScreen.settingsGroup:toFront()
 end
 
-function useDpad()
+local function useDpad()
+	inGameSettings.isVisible = true
+	dpad.isVisible = true
 	dpadGroup.isVisible = true
-	inGameSettings = display.newImage( dpadGroup, "assets/UI/settingsInGame.png", 0, 22 )
-	dpad = display.newImage(dpadGroup, "assets/Controller/dpad.png", 20, CONTENT_HEIGHT - 64)
-	inGameSettings:scale(.5, .5)
-	-- dpad:scale(scale, scale)
-	dpad:addEventListener( "touch", dpadTouched )
-	inGameSettings:addEventListener( "tap", settingsTouched )
 	player:setSequence("idleDown")
 	player:play()
 	player:toFront( )
 end
 
-function useKeyboard()
-	dpadGroup.isVisible = false
+local function useKeyboard()
+	dpad.isVisible = false
+	dpadGroup.isVisible = true
 	gameSettings.isVisible = true
-	inGameSettings = display.newImage( gameSettings, "assets/UI/settingsInGame.png", 0, 22 )
-	inGameSettings:scale(.5, .5)
-	inGameSettings:addEventListener( "tap", settingsTouched )
+	inGameSettings.isVisible = true
 	Runtime:addEventListener( "key", keyboardTouched )
 	player:setSequence("idleDown")
 	player:play()
-	player:toFront( )
+	player:toFront()
 end
 
+dpad:addEventListener( "touch", dpadTouched )
+inGameSettings:addEventListener( "tap", settingsTouched )
 
+dpadTable.settingsTouched = settingsTouched
+dpadTable.useDpad = useDpad
+dpadTable.useKeyboard = useKeyboard
+dpadTable.gameSettings = gameSettings
+dpadTable.inGameSettings = inGameSettings
+dpadTable.dpadGroup = dpadGroup
+dpadTable.dpad = dpad
+
+return dpadTable
 
 

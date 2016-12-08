@@ -7,6 +7,7 @@
 local settingsTable = {}
 
 local background = display.newImageRect( "assets/UI/paperBackground.png", CONTENT_WIDTH, CONTENT_HEIGHT )
+local creditsToSettingsButton = display.newImage( "assets/UI/backarrow.png", 0, 22 )
 background.xScale = 1.2
 background.x = display.contentCenterX
 background.y = display.contentCenterY
@@ -18,6 +19,9 @@ settingsGroup.isVisible = false
 optionsGroup.isVisible = false
 controlsGroup.isVisible = false
 creditsGroup.isVisible = false
+creditsToSettingsButton.isVisible = false
+creditsToSettingsButton:scale(.5, .5)
+creditsToSettingsButton:toFront()
 
 --Settings Group Objects
 
@@ -50,7 +54,7 @@ optionsToSettingsButton:scale(.5, .5)
 
 --Controls Group Objects
 
-local dpad = display.newImage(controlsGroup, "assets/Controller/dpad.png", CONTENT_WIDTH*(1/4), CONTENT_HEIGHT/2)
+local dpadImage = display.newImage(controlsGroup, "assets/Controller/dpad.png", CONTENT_WIDTH*(1/4), CONTENT_HEIGHT/2)
 local arrowKeys = display.newImage(controlsGroup, "assets/UI/arrowKeys.png", CONTENT_WIDTH*(3/4), CONTENT_HEIGHT/2)
 arrowKeys:scale( .5, .5 )
 local controlsToSettingsButton = display.newImage( controlsGroup, "assets/UI/backarrow.png", 0, 22 )
@@ -73,7 +77,6 @@ local thanksOne = display.newImage( creditsGroup, "assets/Credits/mazlinHigbee.p
 local thanksTwo = display.newImage( creditsGroup, "assets/Credits/nickScrivani.png", CONTENT_WIDTH/2, CONTENT_HEIGHT*(12/4)+40 )
 local thanksThree = display.newImage( creditsGroup, "assets/Credits/timGlendinning.png", CONTENT_WIDTH/2, CONTENT_HEIGHT*(13/4)+40 )
 local thanksFour = display.newImage( creditsGroup, "assets/Credits/nickDosSantos.png", CONTENT_WIDTH/2, CONTENT_HEIGHT*(14/4)+40 )
-local creditsToSettingsButton = display.newImage( creditsGroup, "assets/UI/backarrow.png", 0, 22 )
 
 --Settings Group Functions
 
@@ -81,8 +84,8 @@ local function backToSplash()
 	background.isVisible = false
 	splashGroup.isVisible = true
 	settingsGroup.isVisible = false
-	dpadGroup.isVisible = true
-	gameSettings.isVisible = true
+	dpad.dpadGroup.isVisible = true
+	dpad.gameSettings.isVisible = true
 end
 
 local function options()
@@ -103,6 +106,7 @@ local function credits()
 	audio.stop(1)
 	settingsGroup.isVisible = false
 	creditsGroup.isVisible = true
+	creditsToSettingsButton.isVisible = true
 	creditsGroup.y = creditsGroup.height/2+40
 	transition.to( creditsGroup, {time=20000, y=-creditsGroup.height-40, 
 		onComplete = function()
@@ -117,13 +121,16 @@ end
 
 local function quit()
 	audio.stop(1)
+	dpad.dpad.isVisible = false
+	dpad.inGameSettings:removeSelf()
+	dpad.inGameSettings = nil
 	saveButton.isVisible = false
 	quitButton.isVisible = false
 	creditsButton.isVisible = true
 	settingsGroup.isVisible = false
 	background.isVisible = false
-	dpadGroup.isVisible = false
-	gameSettings.isVisible = false
+	dpad.dpadGroup.isVisible = false
+	dpad.gameSettings.isVisible = false
 	splashGroup.isVisible = true
 	splashGroup.alpha = 1
 	audio.play(soundTable["TitleTheme"], {loops = -1})
@@ -167,15 +174,11 @@ local function controlsToSettings()
 	controlsGroup.isVisible = false
 end
 
--- local function startCredits()
--- 	creditsGroup.y = creditsGroup.height/2+40
--- 	transition.to( creditsGroupMoving, {time=20000, y=-creditsGroupMoving.height-40, onComplete=controlsToSettings} )
--- end
-
 --Credits Group Functions
 
 local function creditsToSettings()
 	audio.stop(1)
+	creditsToSettingsButton.isVisible = false
 	settingsGroup.isVisible = true
 	creditsGroup.isVisible = false
 	audio.play(soundTable["TitleTheme"], {loops = -1})

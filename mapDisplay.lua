@@ -34,7 +34,7 @@ local function getTileForIndex(index)
 end
 
 for layerIndex = 1, #map.layers do
-	-- print("Printing layer: " .. map.layers[layerIndex].name)
+	print("Printing layer: " .. map.layers[layerIndex].name)
 	layer = map.layers[layerIndex]
 	for y = 1, layer.height do
 		for x = 1, layer.width do
@@ -42,16 +42,14 @@ for layerIndex = 1, #map.layers do
 			tile = getTileForIndex(layer.data[index])
 			if (tile ~= nil) then
 				tileImage = display.newImage(tile.image, (tile.width*(x)*scale), (tile.height*(y)*scale))
-        tileImage:scale(scale, scale)
-        local nw, nh = tileImage.width*scale*0.5, tileImage.height*scale*0.5;
-        if (layer.name == "Tree and Fence Border Layer") then
-         -- print("adding physics body to "..tile.image)
-         physics.addBody( tileImage, "static", { density=0.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )
-         
-         tileImage.isSleepingAllowed = false
-         tileImage.isAwake = true
-         tileImage.type = "object"
-        end
+        		tileImage:scale(scale, scale)
+        		local nw, nh = tileImage.width*scale*0.5, tileImage.height*scale*0.5;
+        		if (layer.name == "Tree and Fence Border Layer") then
+         			physics.addBody( tileImage, "static", { density=0.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )
+         			-- tileImage.isSleepingAllowed = false
+         			-- tileImage.isAwake = true
+         			-- tileImage.type = "object"
+        		end
 				mapImages:insert(tileImage)
 			end
 		end

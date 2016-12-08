@@ -4,8 +4,7 @@
 --
 -----------------------------------------------------------------------------------------
 
--- local map = require("map")
-physics.setDrawMode( "hybrid" )
+-- physics.setDrawMode( "hybrid" )
 
 local options = {
    width = 326,
@@ -75,13 +74,6 @@ local sequenceData = {
 	}
 }
 
--- local function onLocalCollision(event)
--- 	print("collision")
---     if(event.other.type == "object") then
---     	print("collison has occured with object")
---     end
--- end
-
 local player = display.newSprite(spriteSheet, sequenceData)
 player:scale(scale, scale)
 local nw, nh = map.tilewidth*scale*0.5, map.tileheight*scale*0.5;
@@ -91,9 +83,7 @@ player.y = CONTENT_HEIGHT/2;
 player.isSensor = true
 player.gravityScale = 0
 player.scale = scale
-player.isSleepingAllowed = false
-player.isAwake = true
--- player.collision = onLocalCollision
--- player:addEventListener( "collision", onLocalCollision )
+-- player.isSleepingAllowed = false
+-- player.isAwake = true
 
 return player
