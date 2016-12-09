@@ -84,6 +84,12 @@ player.isSensor = true
 player.gravityScale = 0
 player.scale = scale
 player.speed = 500
+
+player.level = 1
+player.health = 10
+player.critChance = 1.0
+player.gold = 0
+
 -- player.isSleepingAllowed = false
 -- player.isAwake = true
 

@@ -14,16 +14,42 @@ local dpadAction = nil
 local activeAction = nil
 local inGameSettings = display.newImage( dpadGroup, "assets/UI/settingsInGame.png", 0, 22 )
 local characterDisplayButton = display.newImage( dpadGroup, "assets/UI/characterImage.png", 50, 22 )
+-- local dpad = display.newImage(dpadGroup, "assets/Controller/dpad.png", 20, CONTENT_HEIGHT - 64)
+local dpadLeft = display.newImage( dpadGroup, "assets/UI/leftArrow.png", 0, CONTENT_HEIGHT - 75 )
+local dpadUp = display.newImage( dpadGroup, "assets/UI/upArrow.png", 50, CONTENT_HEIGHT - 125 )
+local dpadRight = display.newImage( dpadGroup, "assets/UI/rightArrow.png", 100, CONTENT_HEIGHT - 75 )
+local dpadDown = display.newImage( dpadGroup, "assets/UI/downArrow.png", 50, CONTENT_HEIGHT - 25 )
+
+local aButton = display.newCircle( dpadGroup, CONTENT_WIDTH, CONTENT_HEIGHT-80, 20 )
+aButton.fill = {type="image", filename="assets/UI/aButton.png"}
+local bButton = display.newCircle( dpadGroup, CONTENT_WIDTH-40, CONTENT_HEIGHT-30, 20 )
+bButton.fill = {type="image", filename="assets/UI/bButton.png"}
+local characterDisplay = display.newImage( characterGroup, "assets/UI/CharacterScreen.png", CONTENT_WIDTH/2, CONTENT_HEIGHT/2 )
+local closeCharacterDisplayButton = display.newImage( characterGroup, "assets/UI/closeButton.png", CONTENT_WIDTH/2 - characterDisplay.width/2 + 35, CONTENT_HEIGHT/2 - characterDisplay.height/2 + 35 )
+local characterDisplayPlayerImage = display.newImage( characterGroup, "assets/Sprites/png/2x/hero1/IdleFront (1).png", CONTENT_WIDTH/2-75, CONTENT_HEIGHT/2-10)
+characterDisplayPlayerImage:scale(.55, .55)
+local characterDisplayLevel = display.newText( characterGroup, player.level, CONTENT_WIDTH/2+164, CONTENT_HEIGHT/2 - 75, "Breathe Fire.otf" )
+local characterDisplayHealth = display.newText( characterGroup, player.health, CONTENT_WIDTH/2+165, CONTENT_HEIGHT/2 - 30, "Breathe Fire.otf" )
+local characterDisplayCritChance = display.newText( characterGroup, player.critChance, CONTENT_WIDTH/2+165, CONTENT_HEIGHT/2 + 10, "Breathe Fire.otf" )
+local characterDisplayGold = display.newText( characterGroup, player.gold, CONTENT_WIDTH/2+165, CONTENT_HEIGHT/2 + 55, "Breathe Fire.otf" )
+characterDisplayLevel:setFillColor( 0,0,0 )
+characterDisplayHealth:setFillColor( 0,0,0 )
+characterDisplayCritChance:setFillColor( 0,0,0 )
+characterDisplayGold:setFillColor( 0,0,0 )
+
 inGameSettings:scale(.5, .5)
 inGameSettings.isVisible = false
 characterDisplayButton:scale( .5, .5 )
 characterDisplayButton.isVisible = false
-local dpad = display.newImage(dpadGroup, "assets/Controller/dpad.png", 20, CONTENT_HEIGHT - 64)
-dpad.isVisible = false
-local characterDisplay = display.newImage( characterGroup, "assets/UI/CharacterScreen.png", CONTENT_WIDTH/2, CONTENT_HEIGHT/2 )
-local closeCharacterDisplayButton = display.newImage( characterGroup, "assets/UI/closeButton.png", CONTENT_WIDTH/2 - characterDisplay.width/2 + 35, CONTENT_HEIGHT/2 - characterDisplay.height/2 + 35 )
+dpadLeft.isVisible = false
+dpadUp.isVisible = false
+dpadRight.isVisible = false
+dpadDown.isVisible = false
+aButton.isVisible = false
+bButton.isVisible = false
 closeCharacterDisplayButton:scale(.5, .5)
 characterGroup.isVisible = false
+
 local currentPlayerX = player.x
 local currentPlayerY = player.y
 local currentMapX = mapDisplay.x
@@ -97,22 +123,63 @@ function movePlayer()
 	})
 end
 
-local function dpadTouched(event)
-	if (event.phase == "began") then
-		if (event.x > dpad.x + 10) then
-			dpadAction = "moveRight"
-		elseif (event.x < dpad.x - 10) then
-			dpadAction = "moveLeft"
-		elseif (event.y > dpad.y + 10) then
-			dpadAction = "moveDown"
-		elseif (event.y < dpad.y - 10) then
-			dpadAction = "moveUp"
-		end
+-- local function dpadTouched(event)
+-- 	if (event.phase == "began") then
+-- 		if (event.x > dpad.x + 10) then
+-- 			dpadAction = "moveRight"
+-- 		elseif (event.x < dpad.x - 10) then
+-- 			dpadAction = "moveLeft"
+-- 		elseif (event.y > dpad.y + 10) then
+-- 			dpadAction = "moveDown"
+-- 		elseif (event.y < dpad.y - 10) then
+-- 			dpadAction = "moveUp"
+-- 		end
 
-		if (activeAction == nil) then
+-- 		if (activeAction == nil) then
+-- 			movePlayer()
+-- 		end
+-- 	elseif (event.phase == "ended") then
+-- 		dpadAction = nil
+-- 	end
+-- end
+
+local function dpadLeftTouched(event)
+	if(event.phase == "began") then
+		dpadAction = "moveLeft"
+		if(activeAction == nil) then
 			movePlayer()
 		end
-	elseif (event.phase == "ended") then
+	elseif(event.phase == "ended") then
+		dpadAction = nil
+	end
+end
+local function dpadUpTouched(event)
+	if(event.phase == "began") then
+		dpadAction = "moveUp"
+		if(activeAction == nil) then
+			movePlayer()
+		end
+	elseif(event.phase == "ended") then
+		dpadAction = nil
+	end
+end
+local function dpadRightTouched(event)
+	if(event.phase == "began") then
+		dpadAction = "moveRight"
+		if(activeAction == nil) then
+			movePlayer()
+		end
+	elseif(event.phase == "ended") then
+		dpadAction = nil
+	end
+end
+local function dpadDownTouched(event)
+	if(event.phase == "began") then
+		dpadAction = "moveDown"
+		if(activeAction == nil) then
+			movePlayer()
+		end
+	elseif(event.phase == "ended") then
 		dpadAction = nil
 	end
 end
@@ -159,7 +226,13 @@ end
 local function useDpad()
 	inGameSettings.isVisible = true
 	characterDisplayButton.isVisible = true
-	dpad.isVisible = true
+	dpadLeft.isVisible = true
+	-- dpad.isVisible = true
+	dpadUp.isVisible = true
+	dpadRight.isVisible = true
+	dpadDown.isVisible = true
+	aButton.isVisible = true
+	bButton.isVisible = true
 	dpadGroup.isVisible = true
 	player:setSequence("idleDown")
 	player:play()
@@ -178,7 +251,11 @@ local function useKeyboard()
 	player:toFront()
 end
 
-dpad:addEventListener( "touch", dpadTouched )
+-- dpad:addEventListener( "touch", dpadTouched )
+dpadLeft:addEventListener( "touch", dpadLeftTouched )
+dpadUp:addEventListener( "touch", dpadUpTouched )
+dpadRight:addEventListener( "touch", dpadRightTouched )
+dpadDown:addEventListener( "touch", dpadDownTouched )
 inGameSettings:addEventListener( "tap", settingsTouched )
 characterDisplayButton:addEventListener( "tap", characterDisplayButtonTouched )
 closeCharacterDisplayButton:addEventListener( "tap", closeCharacterDisplay )
@@ -190,7 +267,9 @@ dpadTable.gameSettings = gameSettings
 dpadTable.inGameSettings = inGameSettings
 dpadTable.characterDisplayButton = characterDisplayButton
 dpadTable.dpadGroup = dpadGroup
-dpadTable.dpad = dpad
+-- dpadTable.dpad = dpad
+dpadTable.aButton = aButton
+dpadTable.bButton = bButton
 
 return dpadTable
 

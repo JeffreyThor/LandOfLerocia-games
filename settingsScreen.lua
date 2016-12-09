@@ -121,7 +121,7 @@ end
 
 local function quit()
 	audio.stop(1)
-	dpad.dpad.isVisible = false
+	-- dpad.dpad.isVisible = false
 	dpad.inGameSettings.isVisible = false
 	dpad.characterDisplayButton.isVisible = false
 	saveButton.isVisible = false
