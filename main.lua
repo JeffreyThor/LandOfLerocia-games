@@ -17,6 +17,7 @@ player = require("player")
 splashScreen = require("splashScreen")
 settingsScreen = require("settingsScreen")
 dpad = require("dpad")
+battle = require("battle")
 
 splashScreen.splashGroup.isVisible = true
 settingsScreen.settingsGroup.isVisible = false
