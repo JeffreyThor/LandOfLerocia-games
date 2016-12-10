@@ -32,25 +32,37 @@ battleGroup.isVisible = false
 
 local function startBattle(level)
 
-	if(level == "battleObject") then
+	if(level == "battleStage1") then
 		battleEnemy = battleEnemies.randomFromLevelOne()
-	elseif(level == "Battle Layer 2") then
+	elseif(level == "battleStage2") then
 		battleEnemy = battleEnemies.randomFromLevelTwo()
-	elseif(level == "Battle Layer 3") then
+	elseif(level == "battleStage3") then
 		battleEnemy = battleEnemies.randomFromLevelThree()
+	elseif(level == "bossStage1") then
+		battleEnemy = battleEnemies.startBossOne()
+	elseif(level == "bossStage2") then
+		battleEnemy = battleEnemies.startBossTwo()
+	elseif(level == "bossStage3") then
+		battleEnemy = battleEnemies.startBossThree()
 	end
 	battleGroup:insert(battleEnemy)
 	battleEnemy.x = CONTENT_WIDTH-75
 	battleEnemy.y = 75
 	battleEnemy:scale( .5, .5 )
+	battleEnemy:setSequence( "idle" )
+	battleEnemy:play()
 
-	dpad.dpadUp.isVisible = false
-	dpad.dpadRight.isVisible = false
-	dpad.dpadDown.isVisible = false
-	dpad.dpadLeft.isVisible = false
-	dpad.aButton.isVisible = false
-	dpad.bButton.isVisible = false
-	battleGroup.isVisible = true
+	-- dpad.dpadUp.isVisible = false
+	-- dpad.dpadRight.isVisible = false
+	-- dpad.dpadDown.isVisible = false
+	-- dpad.dpadLeft.isVisible = false
+	-- dpad.aButton.isVisible = false
+	-- dpad.bButton.isVisible = false
+	dpad.dpadGroup.isVisible = false
+	timer.performWithDelay( 1000, 
+		function()
+			battleGroup.isVisible = true
+		end)
 	battlePlayer:setSequence( "idle" )
 	battlePlayer:play()
 	player.yourTurn = true
@@ -89,12 +101,13 @@ local function startBattle(level)
 
 	local function escapeButtonPressed()
 		if(player.yourTurn) then
-			dpad.dpadUp.isVisible = true
-			dpad.dpadRight.isVisible = true
-			dpad.dpadDown.isVisible = true
-			dpad.dpadLeft.isVisible = true
-			dpad.aButton.isVisible = true
-			dpad.bButton.isVisible = true
+			-- dpad.dpadUp.isVisible = true
+			-- dpad.dpadRight.isVisible = true
+			-- dpad.dpadDown.isVisible = true
+			-- dpad.dpadLeft.isVisible = true
+			-- dpad.aButton.isVisible = true
+			-- dpad.bButton.isVisible = true
+			dpad.dpadGroup.isVisible = true
 			battleGroup.isVisible = false
 			player.yourTurn = false
 			battleEnemy:removeSelf()

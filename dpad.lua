@@ -57,7 +57,7 @@ local currentMapY = mapDisplay.y
 
 function playerCollided(event)
 	print(event.other.type)
-	if(event.other.type == "battleObject") then
+	if(event.other.type == "battleStage1" or event.other.type == "battleStage2" or event.other.type == "battleStage3") then
 		player:removeEventListener( "collision", playerCollided )
 		if(math.random(15) == 1) then
 			dpadAction = nil
@@ -66,6 +66,13 @@ function playerCollided(event)
 					battle.startBattle(event.other.type)
 				end)
 		end
+	elseif(event.other.type == "bossStage1" or event.other.type == "bossStage2" or event.other.type == "bossStage3") then
+		player:removeEventListener( "collision", playerCollided )
+		dpadAction = nil
+		timer.performWithDelay( player.speed-1,
+				function()
+					battle.startBattle(event.other.type)
+				end)
 	elseif(event.other.type == "object") then
 		timer.performWithDelay(1, 
 			function()
