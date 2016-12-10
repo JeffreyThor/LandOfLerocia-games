@@ -25,12 +25,12 @@ local function getTileForIndex(index)
 	end
 
 	for i = 1, #map.tilesets do
-		if (i < #map.tilesets) {
+		if (i < #map.tilesets) then
 			firstgid = map.tilesets[i + 1].firstgid
 			if (firstgid > index) then
 				return getTileInSet(i, index)
 			end	
-		}
+		end
 	end
 
 	return getTileInSet(#map.tilesets, index);
