@@ -56,10 +56,31 @@ local currentMapX = mapDisplay.x
 local currentMapY = mapDisplay.y
 
 function playerCollided(event)
-	timer.performWithDelay(1, 
-		function()
-			return resetPosition(event) 
-		end)
+	print(event.other.type)
+	if(event.other.type == "battleStage1" or event.other.type == "battleStage2" or event.other.type == "battleStage3") then
+		player:removeEventListener( "collision", playerCollided )
+		if(math.random(15) == 1) then
+			dpadAction = nil
+			timer.performWithDelay( player.speed-1,
+				function()
+					battle.startBattle(event.other.type)
+				end)
+		end
+	elseif(event.other.type == "bossStage1" or event.other.type == "bossStage2" or event.other.type == "bossStage3") then
+		player:removeEventListener( "collision", playerCollided )
+		dpadAction = nil
+		timer.performWithDelay( player.speed-1,
+				function()
+					battle.startBattle(event.other.type)
+				end)
+	elseif(event.other.type == "object") then
+		timer.performWithDelay(1, 
+			function()
+				return resetPosition(event) 
+			end)
+	else
+		print("collision detected, no response")
+	end
 end
 function resetPosition(event)  
 	transition.cancel(player)
@@ -77,6 +98,7 @@ function resetPosition(event)
 	elseif (activeAction == "moveDown") then
 		player:setSequence("idleDown")
 	end
+	player:removeEventListener( "collision", playerCollided )
 	player:play()
 	activeAction = nil
 end
@@ -118,6 +140,7 @@ function movePlayer()
 			end
 			player:play();
 			activeAction = nil
+			player:removeEventListener( "collision", playerCollided )
 			movePlayer()
 		end
 	})
@@ -268,6 +291,10 @@ dpadTable.inGameSettings = inGameSettings
 dpadTable.characterDisplayButton = characterDisplayButton
 dpadTable.dpadGroup = dpadGroup
 -- dpadTable.dpad = dpad
+dpadTable.dpadUp = dpadUp
+dpadTable.dpadRight = dpadRight
+dpadTable.dpadDown = dpadDown
+dpadTable.dpadLeft = dpadLeft
 dpadTable.aButton = aButton
 dpadTable.bButton = bButton
 

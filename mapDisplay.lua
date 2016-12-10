@@ -49,9 +49,25 @@ for layerIndex = 1, #map.layers do
         		local nw, nh = tileImage.width*scale*0.5, tileImage.height*scale*0.5;
         		if (layer.name == "Object Layer 1") then
          			physics.addBody( tileImage, "static", { density=0.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )
-         			-- tileImage.isSleepingAllowed = false
-         			-- tileImage.isAwake = true
-         			-- tileImage.type = "object"
+         			tileImage.type = "object"
+         		elseif(layer.name == "Battle Layer 1") then
+         			physics.addBody( tileImage, "static", { density=0.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )
+         			tileImage.type = "battleStage1"
+         		elseif(layer.name == "Battle Layer 2") then
+         			physics.addBody( tileImage, "static", { density=0.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )
+         			tileImage.type = "battleStage2"
+         		elseif(layer.name == "Battle Layer 3") then
+         			physics.addBody( tileImage, "static", { density=0.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )
+         			tileImage.type = "battleStage3"
+         		elseif(layer.name == "Boss Layer 1") then
+         			physics.addBody( tileImage, "static", { density=0.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )
+         			tileImage.type = "bossStage1"
+         		elseif(layer.name == "Boss Layer 2") then
+         			physics.addBody( tileImage, "static", { density=0.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )
+         			tileImage.type = "bossStage2"
+         		elseif(layer.name == "Boss Layer 3") then
+         			physics.addBody( tileImage, "static", { density=0.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )
+         			tileImage.type = "bossStage3"
         		end
 				mapImages:insert(tileImage)
 			end

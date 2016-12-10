@@ -89,6 +89,7 @@ player.level = 1
 player.health = 10
 player.critChance = 1.0
 player.gold = 0
+player.yourTurn = false
 
 -- player.isSleepingAllowed = false
 -- player.isAwake = true
