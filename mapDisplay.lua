@@ -24,16 +24,16 @@ local function getTileForIndex(index)
 		return nil
 	end
 
-	numTileSets = 0
 	for i = 1, #map.tilesets do
-		numTileSets++
-		firstgid = map.tilesets[i + 1].firstgid
-		if (firstgid > index) then
-			return getTileInSet(i, index)
-		end
+		if (i < #map.tilesets) {
+			firstgid = map.tilesets[i + 1].firstgid
+			if (firstgid > index) then
+				return getTileInSet(i, index)
+			end	
+		}
 	end
 
-	return getTileInSet(numTileSets, index);
+	return getTileInSet(#map.tilesets, index);
 end
 
 for layerIndex = 1, #map.layers do
