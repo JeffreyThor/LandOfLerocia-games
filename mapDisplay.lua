@@ -18,19 +18,22 @@ local function getTileInSet(setIndex, tileIndex)
 	return nil
 end
 
+-- Assumes that #map.tilesets is ordered by cooresponding `firstgid` values
 local function getTileForIndex(index)
 	if (index == 0) then
 		return nil
 	end
 
 	for i = 1, #map.tilesets do
-		offset = map.tilesets[i].firstgid
-		if (offset > index) then
-			return getTileInSet(i - 1, index)
+		if (i < #map.tilesets) then
+			firstgid = map.tilesets[i + 1].firstgid
+			if (firstgid > index) then
+				return getTileInSet(i, index)
+			end	
 		end
 	end
 
-	return nil
+	return getTileInSet(#map.tilesets, index);
 end
 
 for layerIndex = 1, #map.layers do
