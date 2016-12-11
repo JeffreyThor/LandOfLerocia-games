@@ -33,7 +33,7 @@ local enemyOneSequenceData = {
 	{
 		name = "hurt",
 		frames={4},
-		time = 1000,
+		time = 500,
 		loopCount = 1,
 		loopDirection = "forward"
 	},
@@ -49,78 +49,114 @@ local enemyOneSequenceData = {
 local function randomFromLevelOne()
 	local random = math.random( 2 )
 	if(random == 1) then
-     	local enemyOne = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
-     	enemyOne.level = 1
-     	enemyOne.health = 10
-     	enemyOne.critChance = 1.0
-     	enemyOne.gold = 5
-		return enemyOne
+     	local enemy = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
+     	enemy.level = 1
+     	enemy.maxHealth = math.pow(enemy.level, 2)*10
+     	enemy.health = math.pow(enemy.level, 2)*10
+     	enemy.critChance = 7
+     	enemy.missChance = 7
+     	enemy.gold = 5
+     	enemy.attack = math.pow(enemy.level, 2)
+     	enemy.xp = 50
+		return enemy
 	elseif(random == 2) then
-		local enemyOne = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
-     	enemyOne.level = 1
-     	enemyOne.health = 10
-     	enemyOne.critChance = 1.0
-     	enemyOne.gold = 5
-		return enemyOne
+		local enemy = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
+     	enemy.level = 1
+     	enemy.maxHealth = math.pow(enemy.level, 2)*10
+     	enemy.health = math.pow(enemy.level, 2)*10
+     	enemy.critChance = 7
+     	enemy.missChance = 7
+     	enemy.gold = 5
+     	enemy.attack = 2
+     	enemy.xp = 50
+		return enemy
 	end
 end
 
 local function randomFromLevelTwo()
 	local random = math.random( 3 )
 	if(random == 1) then
-     	local enemyOne = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
-     	enemyOne.level = 1
-     	enemyOne.health = 10
-     	enemyOne.critChance = 1.0
-     	enemyOne.gold = 5
-		return enemyOne
+     	local enemy = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
+     	enemy.level = 1
+     	enemy.maxHealth = math.pow(enemy.level, 2)*10
+     	enemy.health = math.pow(enemy.level, 2)*10
+     	enemy.critChance = 7
+     	enemy.missChance = 7
+     	enemy.gold = 5
+     	enemy.attack = 2
+     	enemy.xp = 50
+		return enemy
 	elseif(random == 2) then
-		local enemyOne = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
-     	enemyOne.level = 1
-     	enemyOne.health = 10
-     	enemyOne.critChance = 1.0
-     	enemyOne.gold = 5
-		return enemyOne
+		local enemy = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
+     	enemy.level = 1
+     	enemy.maxHealth = math.pow(enemy.level, 2)*10
+     	enemy.health = math.pow(enemy.level, 2)*10
+     	enemy.critChance = 7
+     	enemy.missChance = 7
+     	enemy.gold = 5
+     	enemy.attack = 2
+     	enemy.xp = 50
+		return enemyTwo
 	elseif(random == 3) then
-		local enemyOne = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
-     	enemyOne.level = 1
-     	enemyOne.health = 10
-     	enemyOne.critChance = 1.0
-     	enemyOne.gold = 5
-		return enemyOne
+		local enemy = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
+     	enemy.level = 1
+     	enemy.maxHealth = math.pow(enemy.level, 2)*10
+     	enemy.health = math.pow(enemy.level, 2)*10
+     	enemy.critChance = 7
+     	enemy.missChance = 7
+     	enemy.gold = 5
+     	enemy.attack = 2
+     	enemy.xp = 50
+		return enemy
 	end
 end
 
 local function randomFromLevelThree()
 	local random = math.random( 4 )
 	if(random == 1) then
-     	local enemyOne = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
-     	enemyOne.level = 1
-     	enemyOne.health = 10
-     	enemyOne.critChance = 1.0
-     	enemyOne.gold = 5
-		return enemyOne
+     	local enemy = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
+     	enemy.level = 1
+     	enemy.maxHealth = math.pow(enemy.level, 2)*10
+     	enemy.health = math.pow(enemy.level, 2)*10
+     	enemy.critChance = 7
+     	enemy.missChance = 7
+     	enemy.gold = 5
+     	enemy.attack = 2
+     	enemy.xp = 50
+		return enemy
 	elseif(random == 2) then
-		local enemyOne = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
-     	enemyOne.level = 1
-     	enemyOne.health = 10
-     	enemyOne.critChance = 1.0
-     	enemyOne.gold = 5
-		return enemyOne
+		local enemy = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
+     	enemy.level = 1
+     	enemy.maxHealth = math.pow(enemy.level, 2)*10
+     	enemy.health = math.pow(enemy.level, 2)*10
+     	enemy.critChance = 7
+     	enemy.missChance = 7
+     	enemy.gold = 5
+     	enemy.attack = 2
+     	enemy.xp = 50
+		return enemy
 	elseif(random == 3) then
-		local enemyOne = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
-     	enemyOne.level = 1
-     	enemyOne.health = 10
-     	enemyOne.critChance = 1.0
-     	enemyOne.gold = 5
-		return enemyOne
+		local enemy = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
+     	enemy.level = 1
+     	enemy.maxHealth = math.pow(enemy.level, 2)*10
+     	enemy.health = math.pow(enemy.level, 2)*10
+     	enemy.critChance = 7
+     	enemy.missChance = 7
+     	enemy.gold = 5
+     	enemy.attack = 2
+     	enemy.xp = 50
+		return enemy
 	elseif(random == 4) then
-		local enemyOne = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
-     	enemyOne.level = 1
-     	enemyOne.health = 10
-     	enemyOne.critChance = 1.0
-     	enemyOne.gold = 5
-		return enemyOne
+		local enemy = display.newSprite( enemyOneSpriteSheet, enemyOneSequenceData )
+     	enemy.level = 1
+     	enemy.maxHealth = math.pow(enemy.level, 2)*10
+     	enemy.health = math.pow(enemy.level, 2)*10
+     	enemy.critChance = 7
+     	enemy.missChance = 7
+     	enemy.gold = 5
+     	enemy.attack = 2
+     	enemy.xp = 50
+		return enemy
 	end
 end
 

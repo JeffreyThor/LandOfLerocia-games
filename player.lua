@@ -84,12 +84,18 @@ player.isSensor = true
 player.gravityScale = 0
 player.scale = scale
 player.speed = 500
+player.startX = 15
+player.startY = 10
 
 player.level = 1
-player.health = 10
-player.critChance = 1.0
+player.maxHealth = 50
+player.health = 50
+player.critChance = 7
+player.missChance = 7
 player.gold = 0
+player.attack = math.pow( player.level, 2 ) * 1.8
 player.yourTurn = false
+player.xp = 0
 
 -- player.isSleepingAllowed = false
 -- player.isAwake = true

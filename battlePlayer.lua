@@ -31,7 +31,7 @@ local sequenceData = {
 	{
 		name = "hurt",
 		frames={8},
-		time = 1000,
+		time = 500,
 		loopCount = 1,
 		loopDirection = "forward"
 	},

@@ -122,6 +122,11 @@ end
 local function quit()
 	audio.stop(1)
 	-- dpad.dpad.isVisible = false
+	player:removeSelf()
+	player = nil
+	bosses.bossOne:removeSelf()
+	bosses.bossTwo:removeSelf()
+	bosses.bossThree:removeSelf()
 	dpad.inGameSettings.isVisible = false
 	dpad.characterDisplayButton.isVisible = false
 	saveButton.isVisible = false

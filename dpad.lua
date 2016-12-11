@@ -28,13 +28,13 @@ local characterDisplay = display.newImage( characterGroup, "assets/UI/CharacterS
 local closeCharacterDisplayButton = display.newImage( characterGroup, "assets/UI/closeButton.png", CONTENT_WIDTH/2 - characterDisplay.width/2 + 35, CONTENT_HEIGHT/2 - characterDisplay.height/2 + 35 )
 local characterDisplayPlayerImage = display.newImage( characterGroup, "assets/Sprites/png/2x/hero1/IdleFront (1).png", CONTENT_WIDTH/2-75, CONTENT_HEIGHT/2-10)
 characterDisplayPlayerImage:scale(.55, .55)
-local characterDisplayLevel = display.newText( characterGroup, player.level, CONTENT_WIDTH/2+164, CONTENT_HEIGHT/2 - 75, "Breathe Fire.otf" )
-local characterDisplayHealth = display.newText( characterGroup, player.health, CONTENT_WIDTH/2+165, CONTENT_HEIGHT/2 - 30, "Breathe Fire.otf" )
-local characterDisplayCritChance = display.newText( characterGroup, player.critChance, CONTENT_WIDTH/2+165, CONTENT_HEIGHT/2 + 10, "Breathe Fire.otf" )
-local characterDisplayGold = display.newText( characterGroup, player.gold, CONTENT_WIDTH/2+165, CONTENT_HEIGHT/2 + 55, "Breathe Fire.otf" )
+local characterDisplayLevel = display.newText( characterGroup, "", CONTENT_WIDTH/2+164, CONTENT_HEIGHT/2 - 75, "Breathe Fire.otf" )
+local characterDisplayHealth = display.newText( characterGroup, "", CONTENT_WIDTH/2+165, CONTENT_HEIGHT/2 - 30, "Breathe Fire.otf" )
+local characterDisplayMaxHealth = display.newText( characterGroup, "", CONTENT_WIDTH/2+165, CONTENT_HEIGHT/2 + 10, "Breathe Fire.otf" )
+local characterDisplayGold = display.newText( characterGroup, "", CONTENT_WIDTH/2+165, CONTENT_HEIGHT/2 + 55, "Breathe Fire.otf" )
 characterDisplayLevel:setFillColor( 0,0,0 )
 characterDisplayHealth:setFillColor( 0,0,0 )
-characterDisplayCritChance:setFillColor( 0,0,0 )
+characterDisplayMaxHealth:setFillColor( 0,0,0 )
 characterDisplayGold:setFillColor( 0,0,0 )
 
 inGameSettings:scale(.5, .5)
@@ -50,10 +50,10 @@ bButton.isVisible = false
 closeCharacterDisplayButton:scale(.5, .5)
 characterGroup.isVisible = false
 
-local currentPlayerX = player.x
-local currentPlayerY = player.y
-local currentMapX = mapDisplay.x
-local currentMapY = mapDisplay.y
+local currentPlayerX = 0
+local currentPlayerY = 0
+local currentMapX = 0
+local currentMapY = 0
 
 function playerCollided(event)
 	print(event.other.type)
@@ -238,6 +238,10 @@ local function characterDisplayButtonTouched()
 	dpadGroup.isVisible = false
 	gameSettings.isVisible = false
 	characterGroup.isVisible = true
+	characterDisplayLevel.text = player.level
+	characterDisplayHealth.text = player.health
+	characterDisplayMaxHealth.text = player.maxHealth
+	characterDisplayGold.text = player.gold
 end
 
 local function closeCharacterDisplay()
@@ -251,12 +255,18 @@ local function useDpad()
 	characterDisplayButton.isVisible = true
 	dpadLeft.isVisible = true
 	-- dpad.isVisible = true
+	dpadLeft:addEventListener( "touch", dpadLeftTouched )
+	dpadUp:addEventListener( "touch", dpadUpTouched )
+	dpadRight:addEventListener( "touch", dpadRightTouched )
+	dpadDown:addEventListener( "touch", dpadDownTouched )
 	dpadUp.isVisible = true
 	dpadRight.isVisible = true
 	dpadDown.isVisible = true
 	aButton.isVisible = true
 	bButton.isVisible = true
 	dpadGroup.isVisible = true
+	dpadGroup.alpha = 0
+	transition.fadeIn( dpadGroup, {time = 2000} )
 	player:setSequence("idleDown")
 	player:play()
 	player:toFront( )
@@ -275,10 +285,6 @@ local function useKeyboard()
 end
 
 -- dpad:addEventListener( "touch", dpadTouched )
-dpadLeft:addEventListener( "touch", dpadLeftTouched )
-dpadUp:addEventListener( "touch", dpadUpTouched )
-dpadRight:addEventListener( "touch", dpadRightTouched )
-dpadDown:addEventListener( "touch", dpadDownTouched )
 inGameSettings:addEventListener( "tap", settingsTouched )
 characterDisplayButton:addEventListener( "tap", characterDisplayButtonTouched )
 closeCharacterDisplayButton:addEventListener( "tap", closeCharacterDisplay )
