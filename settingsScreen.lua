@@ -91,11 +91,13 @@ end
 local function options()
 	settingsGroup.isVisible = false
 	optionsGroup.isVisible = true
+	optionsGroup:toFront()
 end
 
 local function controls()
 	settingsGroup.isVisible = false
 	controlsGroup.isVisible = true
+	controlsGroup:toFront()
 end
 
 local function save()
@@ -108,6 +110,7 @@ local function credits()
 	creditsGroup.isVisible = true
 	creditsToSettingsButton.isVisible = true
 	creditsGroup.y = creditsGroup.height/4
+	creditsGroup:toFront()
 	transition.to( creditsGroup, {time=20000, y=-creditsGroup.height-40, 
 		onComplete = function()
 			audio.stop(1)
@@ -122,11 +125,14 @@ end
 local function quit()
 	audio.stop(1)
 	-- dpad.dpad.isVisible = false
-	player:removeSelf()
-	player = nil
-	bosses.bossOne:removeSelf()
-	bosses.bossTwo:removeSelf()
-	bosses.bossThree:removeSelf()
+	splashScreen.newGame:addEventListener( "tap", startNewGame )
+	splashScreen.loadGame:addEventListener( "tap", findLoadGame )
+	splashScreen.settings:addEventListener( "tap", openSettings )
+	-- player:removeSelf()
+	-- player = nil
+	-- bosses.bossOne:removeSelf()
+	-- bosses.bossTwo:removeSelf()
+	-- bosses.bossThree:removeSelf()
 	dpad.inGameSettings.isVisible = false
 	dpad.characterDisplayButton.isVisible = false
 	saveButton.isVisible = false

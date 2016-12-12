@@ -28,13 +28,16 @@ local characterDisplay = display.newImage( characterGroup, "assets/UI/CharacterS
 local closeCharacterDisplayButton = display.newImage( characterGroup, "assets/UI/closeButton.png", CONTENT_WIDTH/2 - characterDisplay.width/2 + 35, CONTENT_HEIGHT/2 - characterDisplay.height/2 + 35 )
 local characterDisplayPlayerImage = display.newImage( characterGroup, "assets/Sprites/png/2x/hero1/IdleFront (1).png", CONTENT_WIDTH/2-75, CONTENT_HEIGHT/2-10)
 characterDisplayPlayerImage:scale(.55, .55)
+local characterDisplayName = display.newText( characterGroup, "", 165, CONTENT_HEIGHT - 40, "Breathe Fire.otf" )
 local characterDisplayLevel = display.newText( characterGroup, "", CONTENT_WIDTH/2+164, CONTENT_HEIGHT/2 - 75, "Breathe Fire.otf" )
-local characterDisplayHealth = display.newText( characterGroup, "", CONTENT_WIDTH/2+165, CONTENT_HEIGHT/2 - 30, "Breathe Fire.otf" )
-local characterDisplayMaxHealth = display.newText( characterGroup, "", CONTENT_WIDTH/2+165, CONTENT_HEIGHT/2 + 10, "Breathe Fire.otf" )
+local characterDisplayMaxHealth = display.newText( characterGroup, "", CONTENT_WIDTH/2+165, CONTENT_HEIGHT/2 - 30, "Breathe Fire.otf" )
+local characterDisplayHealth = display.newText( characterGroup, "", CONTENT_WIDTH/2+165, CONTENT_HEIGHT/2 + 10, "Breathe Fire.otf" )
 local characterDisplayGold = display.newText( characterGroup, "", CONTENT_WIDTH/2+165, CONTENT_HEIGHT/2 + 55, "Breathe Fire.otf" )
+characterDisplayName:scale( 2, 2 )
+characterDisplayName:setFillColor( 0,0,0 )
 characterDisplayLevel:setFillColor( 0,0,0 )
-characterDisplayHealth:setFillColor( 0,0,0 )
 characterDisplayMaxHealth:setFillColor( 0,0,0 )
+characterDisplayHealth:setFillColor( 0,0,0 )
 characterDisplayGold:setFillColor( 0,0,0 )
 
 inGameSettings:scale(.5, .5)
@@ -232,12 +235,15 @@ local function settingsTouched(event)
 	gameSettings.isVisible = false
 	settingsScreen.settingsGroup.isVisible = true
 	settingsScreen.background.isVisible = true
+	settingsScreen.background:toFront()
+	settingsScreen.settingsGroup:toFront()
 end
 
 local function characterDisplayButtonTouched()
 	dpadGroup.isVisible = false
 	gameSettings.isVisible = false
 	characterGroup.isVisible = true
+	characterDisplayName.text = player.name
 	characterDisplayLevel.text = player.level
 	characterDisplayHealth.text = player.health
 	characterDisplayMaxHealth.text = player.maxHealth
@@ -269,7 +275,7 @@ local function useDpad()
 	transition.fadeIn( dpadGroup, {time = 2000} )
 	player:setSequence("idleDown")
 	player:play()
-	player:toFront( )
+	player:toFront()
 end
 
 local function useKeyboard()

@@ -29,6 +29,10 @@ transition.fadeIn( settings, { delay = 2000, time=2000 } )
 function startNewGame(event)
 	player = require("player")
 	bosses = require("bosses")
+	player.resetStats()
+	newGame:removeEventListener( "tap", startNewGame )
+	loadGame:removeEventListener( "tap", findLoadGame )
+	settings:removeEventListener( "tap", openSettings )
 	mapDisplay:insert(player)
 	mapDisplay:insert(bosses.bossOne)
 	mapDisplay:insert(bosses.bossTwo)
@@ -78,6 +82,9 @@ newGame:addEventListener( "tap", startNewGame )
 loadGame:addEventListener( "tap", findLoadGame )
 settings:addEventListener( "tap", openSettings )
 
+splashTable.newGame = newGame
+splashTable.loadGame = loadGame
+splashTable.settings = settings
 splashTable.splashGroup = splashGroup
 splashTable.startNewGame = startNewGame
 splashTable.findLoadGame = findLoadGame

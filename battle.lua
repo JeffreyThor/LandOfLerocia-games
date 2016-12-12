@@ -17,19 +17,24 @@ local attackButton = display.newImage( battleGroup, "assets/Battle/attackButton.
 local abilitiesButton = display.newImage( battleGroup, "assets/Battle/abilitiesButton.png", CONTENT_WIDTH-50, CONTENT_HEIGHT-100 )
 local inventoryButton = display.newImage( battleGroup, "assets/Battle/inventoryButton.png", CONTENT_WIDTH-200, CONTENT_HEIGHT-50 )
 local escapeButton = display.newImage( battleGroup, "assets/Battle/escapeButton.png", CONTENT_WIDTH-50, CONTENT_HEIGHT-50 )
---local battleStatsDisplay = display.newImageRect( battleGroup, "assets/Battle/battleStatsDisplay.png", 350, 150 )
-local playerLevel = display.newText( battleGroup, "", 25, 25, "Breathe Fire.otf" )
-local playerHealth = display.newText( battleGroup, "", 25, 50, "Breathe Fire.otf" )
-local playerMaxHealth = display.newText( battleGroup, "", 25, 75, "Breathe Fire.otf" )
-local playerGold = display.newText( battleGroup, "", 25, 100, "Breathe Fire.otf" )
-local enemyLevel = display.newText( battleGroup, "", 50, 25, "Breathe Fire.otf" )
-local enemyHealth = display.newText( battleGroup, "", 50, 50, "Breathe Fire.otf" )
-local enemyMaxHealth = display.newText( battleGroup, "", 50, 75, "Breathe Fire.otf" )
-local enemyGold = display.newText( battleGroup, "", 50, 100, "Breathe Fire.otf" )
+local battleStatsDisplay = display.newImage( battleGroup, "assets/Battle/battleStatsDisplay.png", 150, 85 )
+local playerName = display.newText( battleGroup, "", 75, 25, "Breathe Fire.otf" )
+local playerLevel = display.newText( battleGroup, "", 65, 70, "Breathe Fire.otf" )
+local playerMaxHealth = display.newText( battleGroup, "", 115, 92, "Breathe Fire.otf" )
+local playerHealth = display.newText( battleGroup, "", 80, 115, "Breathe Fire.otf" )
+local playerGold = display.newText( battleGroup, "", 65, 137, "Breathe Fire.otf" )
+local enemyName = display.newText( battleGroup, "", 225, 25, "Breathe Fire.otf" )
+local enemyLevel = display.newText( battleGroup, "", 215, 70, "Breathe Fire.otf" )
+local enemyMaxHealth = display.newText( battleGroup, "", 265, 92, "Breathe Fire.otf" )
+local enemyHealth = display.newText( battleGroup, "", 230, 115, "Breathe Fire.otf" )
+local enemyGold = display.newText( battleGroup, "", 215, 137, "Breathe Fire.otf" )
+battleStatsDisplay:scale(.5, .5)
+playerName:setFillColor( 0,0,0 )
 playerLevel:setFillColor( 0,0,0 )
 playerHealth:setFillColor( 0,0,0 )
 playerMaxHealth:setFillColor( 0,0,0 )
 playerGold:setFillColor( 0,0,0 )
+enemyName:setFillColor( 0,0,0 )
 enemyLevel:setFillColor( 0,0,0 )
 enemyHealth:setFillColor( 0,0,0 )
 enemyMaxHealth:setFillColor( 0,0,0 )
@@ -50,10 +55,12 @@ battlePlayer:scale(.5, .5)
 battleGroup.isVisible = false
 
 local function updateStats()
+	playerName.text = player.name
 	playerLevel.text = player.level
 	playerHealth.text = player.health
 	playerMaxHealth.text = player.maxHealth
 	playerGold.text = player.gold
+	enemyName.text = battleEnemy.name
 	enemyLevel.text = battleEnemy.level
 	enemyHealth.text = battleEnemy.health
 	enemyMaxHealth.text = battleEnemy.maxHealth
@@ -74,13 +81,17 @@ local function startBattle(level)
 	elseif(level == "bossStage3") then
 		battleEnemy = battleEnemies.startBossThree()
 	end
+	audio.stop(1)
+	audio.play(soundTable["BattleMusic"], {loops = -1})
 	battleGroup:insert(battleEnemy)
 	battleEnemy.x = CONTENT_WIDTH-75
 	battleEnemy.y = 75
 	battleEnemy:scale( .5, .5 )
 	battleEnemy:setSequence( "idle" )
 	battleEnemy:play()
-	Runtime:addEventListener( "enterFrame", updateStats )
+
+	print(battleEnemy.bossLevel)
+
 	-- dpad.dpadUp.isVisible = false
 	-- dpad.dpadRight.isVisible = false
 	-- dpad.dpadDown.isVisible = false
@@ -102,9 +113,9 @@ local function startBattle(level)
 		-- print(battleEnemy.health)
 		-- print(battleEnemy.critChance)
 		-- print(battleEnemy.gold)
-		if(math.random(battleEnemy.missChance) == 0) then
+		if(math.random(battleEnemy.missChance) == 1) then
 
-		elseif(math.random(battleEnemy.critChance) == 0) then
+		elseif(math.random(battleEnemy.critChance) == 1) then
 			player.health = player.health - battleEnemy.attack*2
 			battlePlayer:setSequence( "hurt" )
 			battlePlayer:play()
@@ -116,6 +127,14 @@ local function startBattle(level)
 		battleEnemy:setSequence( "attack" )
 		battleEnemy:play()
 		if(player.health <= 0) then
+			player.x = CONTENT_WIDTH/2;
+			player.y = CONTENT_HEIGHT/2;
+			mapDisplay.x = player.x - map.tilewidth * player.startX * scale
+			mapDisplay.y = player.y - map.tileheight * player.startY * scale - (map.tileheight / 1.3 * scale)
+			player.x = 0 + map.tilewidth * player.startX * scale
+			player.y = 0 + map.tileheight * (player.startY+1) * scale - map.tileheight/4 * scale
+			player.health = player.maxHealth
+			player.gold = 0
 			dpad.dpadGroup.isVisible = true
 			battleGroup.isVisible = false
 			attackButton:removeEventListener( "tap", attackButtonPressed )
@@ -141,11 +160,11 @@ local function startBattle(level)
 		enemyTurn()
 	end
 
-	local function attackButtonPressed()
+	function attackButtonPressed()
 		if(player.yourTurn) then
-			if(math.random(battleEnemy.missChance) == 0) then
+			if(math.random(player.missChance) == 1) then
 
-			elseif(math.random(battleEnemy.critChance) == 0) then
+			elseif(math.random(player.critChance) == 1) then
 				battleEnemy.health = battleEnemy.health - player.attack*2
 				battleEnemy:setSequence( "hurt" )
 				battleEnemy:play()
@@ -171,7 +190,7 @@ local function startBattle(level)
 					player.level = player.level + 1
 					player.maxHealth = player.maxHealth + player.level * 20;
 					player.health = player.maxHealth
-					player.attack = math.pow( player.level, 2 ) * 1.8
+					player.attack = math.pow( player.level, 2 ) * 2
 					player.xp = 0
 				end
 			else
@@ -180,7 +199,7 @@ local function startBattle(level)
 		end
 	end
 
-	local function escapeButtonPressed()
+	function escapeButtonPressed()
 		if(player.yourTurn) then
 			-- dpad.dpadUp.isVisible = true
 			-- dpad.dpadRight.isVisible = true
@@ -188,19 +207,37 @@ local function startBattle(level)
 			-- dpad.dpadLeft.isVisible = true
 			-- dpad.aButton.isVisible = true
 			-- dpad.bButton.isVisible = true
-			dpad.dpadGroup.isVisible = true
-			battleGroup.isVisible = false
-			player.yourTurn = false
-			attackButton:removeEventListener( "tap", attackButtonPressed )
-			escapeButton:removeEventListener( "tap", escapeButtonPressed )
-			Runtime:removeEventListener( "enterFrame", updateStats )
-			battleEnemy:removeSelf()
-			battleEnemy = nil
+			if(math.random(5) == 1) then
+				player.yourTurn = false
+				timer.performWithDelay( 500, afterPlayerTurn )
+			else
+				if(battleEnemy.bossLevel == 1) then
+					player.x = player.x + map.tilewidth * scale
+					mapDisplay.x = mapDisplay.x - map.tilewidth * scale
+				elseif(battleEnemy.bossLevel == 2) then
+					player.y = player.y - map.tileheight * scale
+					mapDisplay.y = mapDisplay.y + map.tileheight * scale
+				elseif(battleEnemy.bossLevel == 3) then
+					player.x = player.x - map.tilewidth * scale
+					mapDisplay.x = mapDisplay.x + map.tilewidth * scale
+				end
+				audio.stop(1)
+				audio.play(soundTable["OpeningDemo"], {loops = -1})
+				dpad.dpadGroup.isVisible = true
+				battleGroup.isVisible = false
+				player.yourTurn = false
+				attackButton:removeEventListener( "tap", attackButtonPressed )
+				escapeButton:removeEventListener( "tap", escapeButtonPressed )
+				Runtime:removeEventListener( "enterFrame", updateStats )
+				battleEnemy:removeSelf()
+				battleEnemy = nil
+			end
 		end
 	end
 
 	attackButton:addEventListener( "tap", attackButtonPressed )
 	escapeButton:addEventListener( "tap", escapeButtonPressed )
+	Runtime:addEventListener( "enterFrame", updateStats )
 
 end
 

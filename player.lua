@@ -78,8 +78,6 @@ local player = display.newSprite(spriteSheet, sequenceData)
 player:scale(scale, scale)
 local nw, nh = map.tilewidth*scale*0.5, map.tileheight*scale*0.5;
 physics.addBody( player, "dynamic", {density=0.0,friction=0.0, bounce=0.0, shape={-nw+2,-nh+12,nw-2,-nh+12,nw-2,nh+8,-nw+2,nh+8}} )
-player.x = CONTENT_WIDTH/2;
-player.y = CONTENT_HEIGHT/2;
 player.isSensor = true
 player.gravityScale = 0
 player.scale = scale
@@ -87,15 +85,30 @@ player.speed = 500
 player.startX = 15
 player.startY = 10
 
-player.level = 1
-player.maxHealth = 50
-player.health = 50
-player.critChance = 7
-player.missChance = 7
-player.gold = 0
-player.attack = math.pow( player.level, 2 ) * 1.8
-player.yourTurn = false
-player.xp = 0
+player.resetStats = function()
+	player.x = CONTENT_WIDTH/2;
+	player.y = CONTENT_HEIGHT/2;
+	player.name = "Player"
+	player.level = 1
+	player.maxHealth = 50
+	player.health = 50
+	player.critChance = 7
+	player.missChance = 7
+	player.gold = 0
+	player.attack = math.pow( player.level, 2 ) * 2
+	player.yourTurn = false
+	player.xp = 0
+end
+-- player.name = "Player"
+-- player.level = 1
+-- player.maxHealth = 50
+-- player.health = 50
+-- player.critChance = 7
+-- player.missChance = 7
+-- player.gold = 0
+-- player.attack = math.pow( player.level, 2 ) * 2
+-- player.yourTurn = false
+-- player.xp = 0
 
 -- player.isSleepingAllowed = false
 -- player.isAwake = true
