@@ -23,22 +23,32 @@ local playerLevel = display.newText( battleGroup, "", 65, 70, "Breathe Fire.otf"
 local playerMaxHealth = display.newText( battleGroup, "", 115, 92, "Breathe Fire.otf" )
 local playerHealth = display.newText( battleGroup, "", 80, 115, "Breathe Fire.otf" )
 local playerGold = display.newText( battleGroup, "", 65, 137, "Breathe Fire.otf" )
+local playerText = display.newText( battleGroup, "", 5, CONTENT_HEIGHT-100, "Breathe Fire.otf" )
 local enemyName = display.newText( battleGroup, "", 225, 25, "Breathe Fire.otf" )
 local enemyLevel = display.newText( battleGroup, "", 215, 70, "Breathe Fire.otf" )
 local enemyMaxHealth = display.newText( battleGroup, "", 265, 92, "Breathe Fire.otf" )
 local enemyHealth = display.newText( battleGroup, "", 230, 115, "Breathe Fire.otf" )
 local enemyGold = display.newText( battleGroup, "", 215, 137, "Breathe Fire.otf" )
+local enemyText = display.newText( battleGroup, "", CONTENT_WIDTH-135, 50, "Breathe Fire.otf" )
+local levelUpText = display.newText( "Level Up!", CONTENT_WIDTH/2, CONTENT_HEIGHT/2, "Breathe Fire.otf" )
 battleStatsDisplay:scale(.5, .5)
 playerName:setFillColor( 0,0,0 )
 playerLevel:setFillColor( 0,0,0 )
 playerHealth:setFillColor( 0,0,0 )
 playerMaxHealth:setFillColor( 0,0,0 )
 playerGold:setFillColor( 0,0,0 )
+playerText:setFillColor( 0,0,0 )
+playerText:scale(2, 2)
 enemyName:setFillColor( 0,0,0 )
 enemyLevel:setFillColor( 0,0,0 )
 enemyHealth:setFillColor( 0,0,0 )
 enemyMaxHealth:setFillColor( 0,0,0 )
 enemyGold:setFillColor( 0,0,0 )
+enemyText:setFillColor( 0,0,0 )
+enemyText:scale(2, 2)
+levelUpText:setFillColor( 0,0,0 )
+levelUpText:scale(3, 3)
+levelUpText.alpha = 0
 --battleStatsDisplay.x = 150
 --battleStatsDisplay.y = 85
 local battlePlayer = require("battlePlayer")
@@ -89,7 +99,10 @@ local function startBattle(level)
 	battleEnemy:scale( .5, .5 )
 	battleEnemy:setSequence( "idle" )
 	battleEnemy:play()
-
+	enemyText.alpha = 0
+	playerText.alpha = 0
+	enemyText:toFront()
+	playerText:toFront()
 	print(battleEnemy.bossLevel)
 
 	-- dpad.dpadUp.isVisible = false
@@ -113,35 +126,52 @@ local function startBattle(level)
 		-- print(battleEnemy.health)
 		-- print(battleEnemy.critChance)
 		-- print(battleEnemy.gold)
+		local damage = battleEnemy.attack + math.random(-battleEnemy.level, battleEnemy.level)
 		if(math.random(battleEnemy.missChance) == 1) then
-
+			playerText.text = "Miss!"
+			playerText.alpha = 1
+			transition.fadeOut( playerText, {time=1000} )
 		elseif(math.random(battleEnemy.critChance) == 1) then
-			player.health = player.health - battleEnemy.attack*2
+			player.health = player.health - damage*2
 			battlePlayer:setSequence( "hurt" )
 			battlePlayer:play()
+			playerText.text = "-"..damage*2
+			playerText.alpha = 1
+			transition.fadeOut( playerText, {time=1000} )
 		else
-			player.health = player.health - battleEnemy.attack
+			player.health = player.health - damage
 			battlePlayer:setSequence( "hurt" )
 			battlePlayer:play()
+			playerText.text = "-"..damage
+			playerText.alpha = 1
+			transition.fadeOut( playerText, {time=1000} )
 		end
 		battleEnemy:setSequence( "attack" )
 		battleEnemy:play()
 		if(player.health <= 0) then
-			player.x = CONTENT_WIDTH/2;
-			player.y = CONTENT_HEIGHT/2;
-			mapDisplay.x = player.x - map.tilewidth * player.startX * scale
-			mapDisplay.y = player.y - map.tileheight * player.startY * scale - (map.tileheight / 1.3 * scale)
-			player.x = 0 + map.tilewidth * player.startX * scale
-			player.y = 0 + map.tileheight * (player.startY+1) * scale - map.tileheight/4 * scale
-			player.health = player.maxHealth
-			player.gold = 0
-			dpad.dpadGroup.isVisible = true
-			battleGroup.isVisible = false
-			attackButton:removeEventListener( "tap", attackButtonPressed )
-			escapeButton:removeEventListener( "tap", escapeButtonPressed )
-			Runtime:removeEventListener( "enterFrame", updateStats )
-			battleEnemy:removeSelf()
-			battleEnemy = nil
+			player.health = 0
+			battlePlayer:setSequence( "dead" )
+			battlePlayer:play()
+			timer.performWithDelay( 2000, 
+				function()
+					audio.stop(1)
+					audio.play(soundTable["OpeningDemo"], {loops = -1})
+					player.x = CONTENT_WIDTH/2;
+					player.y = CONTENT_HEIGHT/2;
+					mapDisplay.x = player.x - map.tilewidth * player.startX * scale
+					mapDisplay.y = player.y - map.tileheight * player.startY * scale - (map.tileheight / 1.3 * scale)
+					player.x = 0 + map.tilewidth * player.startX * scale
+					player.y = 0 + map.tileheight * (player.startY+1) * scale - map.tileheight/4 * scale
+					player.health = player.maxHealth
+					player.gold = 0
+					dpad.dpadGroup.isVisible = true
+					battleGroup.isVisible = false
+					attackButton:removeEventListener( "tap", attackButtonPressed )
+					escapeButton:removeEventListener( "tap", escapeButtonPressed )
+					Runtime:removeEventListener( "enterFrame", updateStats )
+					battleEnemy:removeSelf()
+					battleEnemy = nil
+				end)
 		else
 			timer.performWithDelay( attackTime, 
 				function()
@@ -162,37 +192,56 @@ local function startBattle(level)
 
 	function attackButtonPressed()
 		if(player.yourTurn) then
+			local damage = player.attack + math.random(-player.level, player.level)
 			if(math.random(player.missChance) == 1) then
-
+				enemyText.text = "Miss!"
+				enemyText.alpha = 1
+				transition.fadeOut( enemyText, {time=1000} )
 			elseif(math.random(player.critChance) == 1) then
-				battleEnemy.health = battleEnemy.health - player.attack*2
+				battleEnemy.health = battleEnemy.health - damage*2
 				battleEnemy:setSequence( "hurt" )
 				battleEnemy:play()
+				enemyText.text = "-"..damage*2
+				enemyText.alpha = 1
+				transition.fadeOut( enemyText, {time=1000} )
 			else
-				battleEnemy.health = battleEnemy.health - player.attack
+				battleEnemy.health = battleEnemy.health - damage
 				battleEnemy:setSequence( "hurt" )
 				battleEnemy:play()
+				enemyText.text = "-"..damage
+				enemyText.alpha = 1
+				transition.fadeOut( enemyText, {time=1000} )
 			end
 			battlePlayer:setSequence( "attack" )
 			battlePlayer:play()
 			player.yourTurn = false
 			if(battleEnemy.health <= 0) then
-				player.xp = math.sqrt(battleEnemy.level*1000)
-				player.gold = player.gold + battleEnemy.gold
-				dpad.dpadGroup.isVisible = true
-				battleGroup.isVisible = false
-				attackButton:removeEventListener( "tap", attackButtonPressed )
-				escapeButton:removeEventListener( "tap", escapeButtonPressed )
-				Runtime:removeEventListener( "enterFrame", updateStats )
-				battleEnemy:removeSelf()
-				battleEnemy = nil
-				if(player.xp >= player.level * 20) then
-					player.level = player.level + 1
-					player.maxHealth = player.maxHealth + player.level * 20;
-					player.health = player.maxHealth
-					player.attack = math.pow( player.level, 2 ) * 2
-					player.xp = 0
-				end
+				battleEnemy.health = 0
+				battleEnemy:setSequence( "dead" )
+				battleEnemy:play()
+				timer.performWithDelay( 2000, 
+					function()
+						audio.stop(1)
+						audio.play(soundTable["OpeningDemo"], {loops = -1})
+						player.xp = player.xp + math.sqrt(battleEnemy.level*1000)
+						player.gold = player.gold + battleEnemy.gold
+						dpad.dpadGroup.isVisible = true
+						battleGroup.isVisible = false
+						attackButton:removeEventListener( "tap", attackButtonPressed )
+						escapeButton:removeEventListener( "tap", escapeButtonPressed )
+						Runtime:removeEventListener( "enterFrame", updateStats )
+						battleEnemy:removeSelf()
+						battleEnemy = nil
+						if(player.xp >= player.level * 20) then
+							levelUpText.alpha = 1
+							transition.fadeOut( levelUpText, {time=3000} )
+							player.level = player.level + 1
+							player.maxHealth = player.maxHealth + player.level * 20;
+							player.health = player.maxHealth
+							player.attack = math.pow( player.level, 2 ) * 2
+							player.xp = 0
+						end
+					end)
 			else
 				timer.performWithDelay( 500, afterPlayerTurn )
 			end
@@ -208,6 +257,9 @@ local function startBattle(level)
 			-- dpad.aButton.isVisible = true
 			-- dpad.bButton.isVisible = true
 			if(math.random(5) == 1) then
+				playerText.text = "Can't Escape!"
+				playerText.alpha = 1
+				transition.fadeOut( playerText, {time=1000} )
 				player.yourTurn = false
 				timer.performWithDelay( 500, afterPlayerTurn )
 			else

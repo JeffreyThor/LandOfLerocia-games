@@ -189,6 +189,7 @@ end
 
 local function creditsToSettings()
 	audio.stop(1)
+	transition.cancel( creditsGroup )
 	creditsToSettingsButton.isVisible = false
 	settingsGroup.isVisible = true
 	creditsGroup.isVisible = false

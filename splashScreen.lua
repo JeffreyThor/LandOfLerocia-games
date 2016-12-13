@@ -27,8 +27,6 @@ transition.fadeIn( loadGame, { delay = 2000, time=2000 } )
 transition.fadeIn( settings, { delay = 2000, time=2000 } )
 
 function startNewGame(event)
-	player = require("player")
-	bosses = require("bosses")
 	player.resetStats()
 	newGame:removeEventListener( "tap", startNewGame )
 	loadGame:removeEventListener( "tap", findLoadGame )
@@ -61,6 +59,7 @@ function startNewGame(event)
 	settingsScreen.creditsButton.isVisible = false
 	audio.play(soundTable["OpeningDemo"], {loops = -1})
 	dpad.useDpad()
+	dpad.dpadGroup.isVisible = true
 	--dpad.useKeyboard()
 	return true
 end
