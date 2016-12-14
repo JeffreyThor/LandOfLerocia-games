@@ -4,9 +4,9 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.3.0</string>
+        <string>4.3.1</string>
         <key>fileName</key>
-        <string>/Users/jeffreythor/Downloads/SpritePack.tps</string>
+        <string>/Users/jeffreythor/Documents/Git Repositories/LandOfLerocia-games/assets/Sprites/png/1x/hero1/SpritePack.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -28,15 +28,15 @@
             </struct>
         </array>
         <key>allowRotation</key>
-        <false/>
+        <true/>
         <key>shapeDebug</key>
         <false/>
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>corona-imagesheet</string>
+        <string>spritesheet-only</string>
         <key>textureFileName</key>
-        <filename></filename>
+        <filename>SpritePack.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -104,7 +104,7 @@
         <key>algorithmSettings</key>
         <struct type="AlgorithmSettings">
             <key>algorithm</key>
-            <enum type="AlgorithmSettings::AlgorithmId">Basic</enum>
+            <enum type="AlgorithmSettings::AlgorithmId">MaxRects</enum>
             <key>freeSizeMode</key>
             <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Best</enum>
             <key>sizeConstraints</key>
@@ -146,13 +146,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileNames</key>
-        <map type="GFileNameMap">
-            <key>lua</key>
-            <struct type="DataFile">
-                <key>name</key>
-                <filename></filename>
-            </struct>
-        </map>
+        <map type="GFileNameMap"/>
         <key>multiPack</key>
         <false/>
         <key>forceIdenticalLayout</key>
@@ -179,7 +173,7 @@
             <key>scaleMode</key>
             <enum type="ScaleMode">Smooth</enum>
             <key>extrude</key>
-            <uint>1</uint>
+            <uint>0</uint>
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMargin</key>
@@ -197,70 +191,70 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/AttackBack (1).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/AttackBack (2).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/AttackBack (3).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/AttackBack (4).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/AttackFront (1).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/AttackFront (2).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/AttackFront (3).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/AttackFront (4).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/AttackLeft (1).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/AttackLeft (2).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/AttackLeft (3).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/AttackLeft (4).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/AttackRight (1).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/AttackRight (2).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/AttackRight (3).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/AttackRight (4).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/DeadBack (1).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/DeadBack (2).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/DeadBack (3).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/DeadFront (1).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/DeadFront (2).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/DeadFront (3).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/DeadLeft (1).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/DeadLeft (2).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/DeadLeft (3).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/DeadRight (1).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/DeadRight (2).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/DeadRight (3).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/HurtBack.png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/HurtFront.png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/HurtLeft.png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/HurtRight.png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/IdleBack (1).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/IdleBack (2).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/IdleBack (3).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/IdleBack (4).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/IdleFront (1).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/IdleFront (2).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/IdleFront (3).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/IdleFront (4).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/IdleLeft (1).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/IdleLeft (2).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/IdleLeft (3).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/IdleLeft (4).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/IdleRight (1).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/IdleRight (2).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/IdleRight (3).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/IdleRight (4).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/WalkBack (1).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/WalkBack (2).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/WalkBack (3).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/WalkBack (4).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/WalkFront (1).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/WalkFront (2).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/WalkFront (3).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/WalkFront (4).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/WalkLeft (1).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/WalkLeft (2).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/WalkLeft (3).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/WalkLeft (4).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/WalkRight (1).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/WalkRight (2).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/WalkRight (3).png</key>
-            <key type="filename">../Desktop/games project/assets/Sprites/png/1x/hero1/WalkRight (4).png</key>
+            <key type="filename">AttackBack (1).png</key>
+            <key type="filename">AttackBack (2).png</key>
+            <key type="filename">AttackBack (3).png</key>
+            <key type="filename">AttackBack (4).png</key>
+            <key type="filename">AttackFront (1).png</key>
+            <key type="filename">AttackFront (2).png</key>
+            <key type="filename">AttackFront (3).png</key>
+            <key type="filename">AttackFront (4).png</key>
+            <key type="filename">AttackLeft (1).png</key>
+            <key type="filename">AttackLeft (2).png</key>
+            <key type="filename">AttackLeft (3).png</key>
+            <key type="filename">AttackLeft (4).png</key>
+            <key type="filename">AttackRight (1).png</key>
+            <key type="filename">AttackRight (2).png</key>
+            <key type="filename">AttackRight (3).png</key>
+            <key type="filename">AttackRight (4).png</key>
+            <key type="filename">DeadBack (1).png</key>
+            <key type="filename">DeadBack (2).png</key>
+            <key type="filename">DeadBack (3).png</key>
+            <key type="filename">DeadFront (1).png</key>
+            <key type="filename">DeadFront (2).png</key>
+            <key type="filename">DeadFront (3).png</key>
+            <key type="filename">DeadLeft (1).png</key>
+            <key type="filename">DeadLeft (2).png</key>
+            <key type="filename">DeadLeft (3).png</key>
+            <key type="filename">DeadRight (1).png</key>
+            <key type="filename">DeadRight (2).png</key>
+            <key type="filename">DeadRight (3).png</key>
+            <key type="filename">HurtBack.png</key>
+            <key type="filename">HurtFront.png</key>
+            <key type="filename">HurtLeft.png</key>
+            <key type="filename">HurtRight.png</key>
+            <key type="filename">IdleBack (1).png</key>
+            <key type="filename">IdleBack (2).png</key>
+            <key type="filename">IdleBack (3).png</key>
+            <key type="filename">IdleBack (4).png</key>
+            <key type="filename">IdleFront (1).png</key>
+            <key type="filename">IdleFront (2).png</key>
+            <key type="filename">IdleFront (3).png</key>
+            <key type="filename">IdleFront (4).png</key>
+            <key type="filename">IdleLeft (1).png</key>
+            <key type="filename">IdleLeft (2).png</key>
+            <key type="filename">IdleLeft (3).png</key>
+            <key type="filename">IdleLeft (4).png</key>
+            <key type="filename">IdleRight (1).png</key>
+            <key type="filename">IdleRight (2).png</key>
+            <key type="filename">IdleRight (3).png</key>
+            <key type="filename">IdleRight (4).png</key>
+            <key type="filename">WalkBack (1).png</key>
+            <key type="filename">WalkBack (2).png</key>
+            <key type="filename">WalkBack (3).png</key>
+            <key type="filename">WalkBack (4).png</key>
+            <key type="filename">WalkFront (1).png</key>
+            <key type="filename">WalkFront (2).png</key>
+            <key type="filename">WalkFront (3).png</key>
+            <key type="filename">WalkFront (4).png</key>
+            <key type="filename">WalkLeft (1).png</key>
+            <key type="filename">WalkLeft (2).png</key>
+            <key type="filename">WalkLeft (3).png</key>
+            <key type="filename">WalkLeft (4).png</key>
+            <key type="filename">WalkRight (1).png</key>
+            <key type="filename">WalkRight (2).png</key>
+            <key type="filename">WalkRight (3).png</key>
+            <key type="filename">WalkRight (4).png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -276,70 +270,70 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/AttackBack (1).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/AttackBack (2).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/AttackBack (3).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/AttackBack (4).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/AttackFront (1).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/AttackFront (2).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/AttackFront (3).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/AttackFront (4).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/AttackLeft (1).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/AttackLeft (2).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/AttackLeft (3).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/AttackLeft (4).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/AttackRight (1).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/AttackRight (2).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/AttackRight (3).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/AttackRight (4).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/DeadBack (1).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/DeadBack (2).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/DeadBack (3).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/DeadFront (1).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/DeadFront (2).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/DeadFront (3).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/DeadLeft (1).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/DeadLeft (2).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/DeadLeft (3).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/DeadRight (1).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/DeadRight (2).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/DeadRight (3).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/HurtBack.png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/HurtFront.png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/HurtLeft.png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/HurtRight.png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/IdleBack (1).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/IdleBack (2).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/IdleBack (3).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/IdleBack (4).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/IdleFront (1).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/IdleFront (2).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/IdleFront (3).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/IdleFront (4).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/IdleLeft (1).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/IdleLeft (2).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/IdleLeft (3).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/IdleLeft (4).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/IdleRight (1).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/IdleRight (2).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/IdleRight (3).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/IdleRight (4).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/WalkBack (1).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/WalkBack (2).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/WalkBack (3).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/WalkBack (4).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/WalkFront (1).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/WalkFront (2).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/WalkFront (3).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/WalkFront (4).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/WalkLeft (1).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/WalkLeft (2).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/WalkLeft (3).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/WalkLeft (4).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/WalkRight (1).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/WalkRight (2).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/WalkRight (3).png</filename>
-            <filename>../Desktop/games project/assets/Sprites/png/1x/hero1/WalkRight (4).png</filename>
+            <filename>AttackBack (1).png</filename>
+            <filename>AttackBack (2).png</filename>
+            <filename>AttackBack (3).png</filename>
+            <filename>AttackBack (4).png</filename>
+            <filename>AttackFront (1).png</filename>
+            <filename>AttackFront (2).png</filename>
+            <filename>AttackFront (3).png</filename>
+            <filename>AttackFront (4).png</filename>
+            <filename>AttackLeft (1).png</filename>
+            <filename>AttackLeft (2).png</filename>
+            <filename>AttackLeft (3).png</filename>
+            <filename>AttackLeft (4).png</filename>
+            <filename>AttackRight (1).png</filename>
+            <filename>AttackRight (2).png</filename>
+            <filename>AttackRight (3).png</filename>
+            <filename>AttackRight (4).png</filename>
+            <filename>DeadBack (1).png</filename>
+            <filename>DeadBack (2).png</filename>
+            <filename>DeadBack (3).png</filename>
+            <filename>DeadFront (1).png</filename>
+            <filename>DeadFront (2).png</filename>
+            <filename>DeadFront (3).png</filename>
+            <filename>DeadLeft (1).png</filename>
+            <filename>DeadLeft (2).png</filename>
+            <filename>DeadLeft (3).png</filename>
+            <filename>DeadRight (1).png</filename>
+            <filename>DeadRight (2).png</filename>
+            <filename>DeadRight (3).png</filename>
+            <filename>HurtBack.png</filename>
+            <filename>HurtFront.png</filename>
+            <filename>HurtLeft.png</filename>
+            <filename>HurtRight.png</filename>
+            <filename>IdleBack (1).png</filename>
+            <filename>IdleBack (2).png</filename>
+            <filename>IdleBack (3).png</filename>
+            <filename>IdleBack (4).png</filename>
+            <filename>IdleFront (1).png</filename>
+            <filename>IdleFront (2).png</filename>
+            <filename>IdleFront (3).png</filename>
+            <filename>IdleFront (4).png</filename>
+            <filename>IdleLeft (1).png</filename>
+            <filename>IdleLeft (2).png</filename>
+            <filename>IdleLeft (3).png</filename>
+            <filename>IdleLeft (4).png</filename>
+            <filename>IdleRight (1).png</filename>
+            <filename>IdleRight (2).png</filename>
+            <filename>IdleRight (3).png</filename>
+            <filename>IdleRight (4).png</filename>
+            <filename>WalkBack (1).png</filename>
+            <filename>WalkBack (2).png</filename>
+            <filename>WalkBack (3).png</filename>
+            <filename>WalkBack (4).png</filename>
+            <filename>WalkFront (1).png</filename>
+            <filename>WalkFront (2).png</filename>
+            <filename>WalkFront (3).png</filename>
+            <filename>WalkFront (4).png</filename>
+            <filename>WalkLeft (1).png</filename>
+            <filename>WalkLeft (2).png</filename>
+            <filename>WalkLeft (3).png</filename>
+            <filename>WalkLeft (4).png</filename>
+            <filename>WalkRight (1).png</filename>
+            <filename>WalkRight (2).png</filename>
+            <filename>WalkRight (3).png</filename>
+            <filename>WalkRight (4).png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -16,7 +16,10 @@ local soundTable = {
     OrdonVillage = audio.loadSound( "assets/Sounds/OrdonVillage.mp3" ),
     Shop = audio.loadSound( "assets/Sounds/Shop.mp3", {channel=1} ),
     Cave = audio.loadSound( "assets/Sounds/Cave.mp3", {channel=1} ),
-    Walk = audio.loadSound( "assets/Sounds/Walk.mp3", {channel = 2})
+    Walk = audio.loadSound( "assets/Sounds/Walk.mp3", {channel = 2}),
+    BossOne = audio.loadSound( "assets/Sounds/BossOne.mp3", {channel = 1} ),
+    BossTwo = audio.loadSound( "assets/Sounds/BossTwo.mp3", {channel = 1} ),
+    BossThree = audio.loadSound( "assets/Sounds/BossThree.mp3", {channel = 1} )
 }
 
 return soundTable

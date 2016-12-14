@@ -109,6 +109,7 @@ local function credits()
 	settingsGroup.isVisible = false
 	creditsGroup.isVisible = true
 	creditsToSettingsButton.isVisible = true
+	creditsToSettingsButton:toFront()
 	creditsGroup.y = creditsGroup.height/4
 	creditsGroup:toFront()
 	transition.to( creditsGroup, {time=20000, y=-creditsGroup.height-40, 
@@ -125,6 +126,7 @@ end
 local function quit()
 	audio.stop(1)
 	-- dpad.dpad.isVisible = false
+
 	splashScreen.newGame:addEventListener( "tap", startNewGame )
 	splashScreen.loadGame:addEventListener( "tap", findLoadGame )
 	splashScreen.settings:addEventListener( "tap", openSettings )

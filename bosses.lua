@@ -6,16 +6,33 @@
 
 local bossTable = {}
 
-local options = {
+local optionsOne = {
    width = 234,
    height = 156,
    sheetContentWidth = 234 * 2, 
    sheetContentHeight = 156 * 8,
    numFrames = 16
 }
-local bossOneSpriteSheet = graphics.newImageSheet( "assets/Sprites/png/1x/hero2/SpritePack.png", options )
+local optionsTwo = {
+	width = 282,
+	height = 164,
+	sheetContentWidth = 282*3,
+	sheetContentHeight = 164*6,
+	numFrames = 16
+}
+local optionsThree = {
+	width = 590/4,
+	height = 640/4,
+	sheetContentWidth = 590,
+	sheetContentHeight = 640,
+	numFrames = 16
+}
 
-local bossOneSequenceData = {
+local bossOneSpriteSheet = graphics.newImageSheet( "assets/Sprites/png/1x/hero2/SpritePack.png", optionsOne )
+local bossTwoSpriteSheet = graphics.newImageSheet( "assets/Sprites/png/1x/goblin1/SpritePack.png", optionsTwo )
+local bossThreeSpriteSheet = graphics.newImageSheet( "assets/Sprites/png/1x/assassin/SpritePack.png", optionsThree )
+
+local bossSequenceData = {
 	{
 		name = "idleUp",
 		frames={1,2,3,4},
@@ -46,17 +63,17 @@ local bossOneSequenceData = {
 	}
 }
 
-local bossOne = display.newSprite(bossOneSpriteSheet, bossOneSequenceData)
+local bossOne = display.newSprite(bossOneSpriteSheet, bossSequenceData)
 bossOne:scale(scale, scale)
 local nw, nh = map.tilewidth*scale*0.5, map.tileheight*scale*0.5;
 physics.addBody( bossOne, "static", { density=0.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )
 
-local bossTwo = display.newSprite(bossOneSpriteSheet, bossOneSequenceData)
+local bossTwo = display.newSprite(bossTwoSpriteSheet, bossSequenceData)
 bossTwo:scale(scale, scale)
 local nw, nh = map.tilewidth*scale*0.5, map.tileheight*scale*0.5;
 physics.addBody( bossTwo, "static", { density=0.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )
 
-local bossThree = display.newSprite(bossOneSpriteSheet, bossOneSequenceData)
+local bossThree = display.newSprite(bossThreeSpriteSheet, bossSequenceData)
 bossThree:scale(scale, scale)
 local nw, nh = map.tilewidth*scale*0.5, map.tileheight*scale*0.5;
 physics.addBody( bossThree, "static", { density=0.0,friction=0.0, bounce=0.0, shape={-nw,-nh,nw,-nh,nw,nh,-nw,nh} } )

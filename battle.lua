@@ -78,21 +78,27 @@ local function updateStats()
 end
 
 local function startBattle(level)
+	audio.stop(1)
 	if(level == "battleStage1") then
 		battleEnemy = battleEnemies.randomFromLevelOne()
+		audio.play(soundTable["BattleMusic"], {loops = -1})
 	elseif(level == "battleStage2") then
 		battleEnemy = battleEnemies.randomFromLevelTwo()
+		audio.play(soundTable["BattleMusic"], {loops = -1})
 	elseif(level == "battleStage3") then
 		battleEnemy = battleEnemies.randomFromLevelThree()
+		audio.play(soundTable["BattleMusic"], {loops = -1})
 	elseif(level == "bossStage1") then
 		battleEnemy = battleEnemies.startBossOne()
+		audio.play(soundTable["BossOne"], {loops = -1})
 	elseif(level == "bossStage2") then
 		battleEnemy = battleEnemies.startBossTwo()
+		audio.play(soundTable["BossTwo"], {loops = -1})
 	elseif(level == "bossStage3") then
 		battleEnemy = battleEnemies.startBossThree()
+		audio.play(soundTable["BossThree"], {loops = -1})
 	end
-	audio.stop(1)
-	audio.play(soundTable["BattleMusic"], {loops = -1})
+	-- audio.play(soundTable["BattleMusic"], {loops = -1})
 	battleGroup:insert(battleEnemy)
 	battleEnemy.x = CONTENT_WIDTH-75
 	battleEnemy.y = 75
@@ -112,7 +118,7 @@ local function startBattle(level)
 	-- dpad.aButton.isVisible = false
 	-- dpad.bButton.isVisible = false
 	dpad.dpadGroup.isVisible = false
-	timer.performWithDelay( 1000, 
+	timer.performWithDelay( 2000, 
 		function()
 			battleGroup.isVisible = true
 		end)
@@ -150,6 +156,8 @@ local function startBattle(level)
 		battleEnemy:play()
 		if(player.health <= 0) then
 			player.health = 0
+			player:setSequence( "idleDown" )
+			player:play()
 			battlePlayer:setSequence( "dead" )
 			battlePlayer:play()
 			timer.performWithDelay( 2000, 
@@ -216,6 +224,16 @@ local function startBattle(level)
 			battlePlayer:play()
 			player.yourTurn = false
 			if(battleEnemy.health <= 0) then
+				if(level == "bossStage1") then
+					bosses.bossOne.isVisible = false
+					player.bossOneDefeated = true
+				elseif(level == "bossStage2") then
+					bosses.bossTwo.isVisible = false
+					player.bossTwoDefeated = true
+				elseif(level == "bossStage3") then
+					bosses.bossThree.isVisible = false
+					player.bossThreeDefeated = true
+				end
 				battleEnemy.health = 0
 				battleEnemy:setSequence( "dead" )
 				battleEnemy:play()
@@ -236,7 +254,7 @@ local function startBattle(level)
 							levelUpText.alpha = 1
 							transition.fadeOut( levelUpText, {time=3000} )
 							player.level = player.level + 1
-							player.maxHealth = player.maxHealth + player.level * 20;
+							player.maxHealth = player.maxHealth + player.level * 15;
 							player.health = player.maxHealth
 							player.attack = math.pow( player.level, 2 ) * 2
 							player.xp = 0

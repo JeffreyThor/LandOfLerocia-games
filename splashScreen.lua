@@ -59,7 +59,7 @@ function startNewGame(event)
 	settingsScreen.creditsButton.isVisible = false
 	audio.play(soundTable["OpeningDemo"], {loops = -1})
 	dpad.useDpad()
-	dpad.dpadGroup.isVisible = true
+	dpad.dialog("Welcome to the Land Of Lerocia! This world is yours to explore, but be wary, there are people in this world who are dangerous. Do what you must to fend them off, but be careful. Now let your journey begin!")
 	--dpad.useKeyboard()
 	return true
 end
@@ -71,6 +71,14 @@ end
 function openSettings(event)
 	dpad.dpadGroup.isVisible = false
 	dpad.gameSettings.isVisible = false
+	dpad.dpadLeft.isVisible = false
+	dpad.dpadUp.isVisible = false
+	dpad.dpadRight.isVisible = false
+	dpad.dpadDown.isVisible = false
+	dpad.aButton.isVisible = false
+	dpad.bButton.isVisible = false
+	dpad.textBox.isVisible = false
+	dpad.helpText.isVisible = false
 	splashGroup.isVisible = false
 	settingsScreen.background.isVisible = true
 	settingsScreen.settingsGroup.isVisible = true

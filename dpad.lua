@@ -20,6 +20,23 @@ local dpadUp = display.newImage( dpadGroup, "assets/UI/upArrow.png", 50, CONTENT
 local dpadRight = display.newImage( dpadGroup, "assets/UI/rightArrow.png", 100, CONTENT_HEIGHT - 75 )
 local dpadDown = display.newImage( dpadGroup, "assets/UI/downArrow.png", 50, CONTENT_HEIGHT - 25 )
 
+local textBox = display.newImageRect( dpadGroup, "assets/UI/textBox.png", CONTENT_WIDTH, 100 )
+textBox.x = CONTENT_WIDTH/2
+textBox.y = CONTENT_HEIGHT - 60
+local textOptions = {
+	parent = dpadGroup,
+	text = "",
+   	x = CONTENT_WIDTH/2,
+   	y = CONTENT_HEIGHT-60,
+   	fontSize = 16,
+   	font = "Breathe Fire.otf",
+   	width = CONTENT_WIDTH-40,
+   	height = 80,
+   	align = "left"
+}
+-- local helpText = display.newText( dpadGroup, "", CONTENT_WIDTH/2, CONTENT_HEIGHT-60, "Breathe Fire.otf" )
+local helpText = display.newText( textOptions )
+
 local aButton = display.newCircle( dpadGroup, CONTENT_WIDTH, CONTENT_HEIGHT-80, 20 )
 aButton.fill = {type="image", filename="assets/UI/aButton.png"}
 local bButton = display.newCircle( dpadGroup, CONTENT_WIDTH-40, CONTENT_HEIGHT-30, 20 )
@@ -39,6 +56,7 @@ characterDisplayLevel:setFillColor( 0,0,0 )
 characterDisplayMaxHealth:setFillColor( 0,0,0 )
 characterDisplayHealth:setFillColor( 0,0,0 )
 characterDisplayGold:setFillColor( 0,0,0 )
+helpText:setFillColor( 0,0,0 )
 
 inGameSettings:scale(.5, .5)
 inGameSettings.isVisible = false
@@ -48,6 +66,8 @@ dpadLeft.isVisible = false
 dpadUp.isVisible = false
 dpadRight.isVisible = false
 dpadDown.isVisible = false
+textBox.isVisible = false
+helpText.isVisible = false
 aButton.isVisible = false
 bButton.isVisible = false
 closeCharacterDisplayButton:scale(.5, .5)
@@ -58,24 +78,50 @@ local currentPlayerY = 0
 local currentMapX = 0
 local currentMapY = 0
 
+local function dialog(message)
+	dpadLeft.isVisible = false
+	dpadUp.isVisible = false
+	dpadRight.isVisible = false
+	dpadDown.isVisible = false
+	aButton.isVisible = false
+	bButton.isVisible = false
+	helpText.text = message
+	textBox.isVisible = true
+	helpText.isVisible = true
+end
+
+function closeBox()
+	dpadLeft.isVisible = true
+	dpadUp.isVisible = true
+	dpadRight.isVisible = true
+	dpadDown.isVisible = true
+	aButton.isVisible = true
+	bButton.isVisible = true
+	textBox.isVisible = false
+	helpText.isVisible = false
+	helpText.text = ""
+end
+
 function playerCollided(event)
 	print(event.other.type)
 	if(event.other.type == "battleStage1" or event.other.type == "battleStage2" or event.other.type == "battleStage3") then
 		player:removeEventListener( "collision", playerCollided )
 		if(math.random(15) == 1) then
 			dpadAction = nil
-			timer.performWithDelay( player.speed-1,
-				function()
-					battle.startBattle(event.other.type)
-				end)
+			battle.startBattle(event.other.type)
 		end
 	elseif(event.other.type == "bossStage1" or event.other.type == "bossStage2" or event.other.type == "bossStage3") then
-		player:removeEventListener( "collision", playerCollided )
-		dpadAction = nil
-		timer.performWithDelay( player.speed-1,
-				function()
-					battle.startBattle(event.other.type)
-				end)
+		if(event.other.type == "bossStage1" and player.bossOneDefeated) then
+			print("Already defeated")
+		elseif(event.other.type == "bossStage2" and player.bossTwoDefeated) then
+			print("Already defeated")
+		elseif(event.other.type == "bossStage3" and player.bossThreeDefeated) then
+			print("Already defeated")
+		else
+			player:removeEventListener( "collision", playerCollided )
+			dpadAction = nil
+			battle.startBattle(event.other.type)
+		end
 	elseif(event.other.type == "object") then
 		timer.performWithDelay(1, 
 			function()
@@ -259,12 +305,8 @@ end
 local function useDpad()
 	inGameSettings.isVisible = true
 	characterDisplayButton.isVisible = true
-	dpadLeft.isVisible = true
 	-- dpad.isVisible = true
-	dpadLeft:addEventListener( "touch", dpadLeftTouched )
-	dpadUp:addEventListener( "touch", dpadUpTouched )
-	dpadRight:addEventListener( "touch", dpadRightTouched )
-	dpadDown:addEventListener( "touch", dpadDownTouched )
+	dpadLeft.isVisible = true
 	dpadUp.isVisible = true
 	dpadRight.isVisible = true
 	dpadDown.isVisible = true
@@ -291,9 +333,15 @@ local function useKeyboard()
 end
 
 -- dpad:addEventListener( "touch", dpadTouched )
+dpadLeft:addEventListener( "touch", dpadLeftTouched )
+dpadUp:addEventListener( "touch", dpadUpTouched )
+dpadRight:addEventListener( "touch", dpadRightTouched )
+dpadDown:addEventListener( "touch", dpadDownTouched )
 inGameSettings:addEventListener( "tap", settingsTouched )
 characterDisplayButton:addEventListener( "tap", characterDisplayButtonTouched )
 closeCharacterDisplayButton:addEventListener( "tap", closeCharacterDisplay )
+
+textBox:addEventListener( "tap", closeBox )
 
 dpadTable.settingsTouched = settingsTouched
 dpadTable.useDpad = useDpad
@@ -307,8 +355,12 @@ dpadTable.dpadUp = dpadUp
 dpadTable.dpadRight = dpadRight
 dpadTable.dpadDown = dpadDown
 dpadTable.dpadLeft = dpadLeft
+dpadTable.textBox = textBox
+dpadTable.helpText = helpText
 dpadTable.aButton = aButton
 dpadTable.bButton = bButton
+
+dpadTable.dialog = dialog
 
 return dpadTable
 
