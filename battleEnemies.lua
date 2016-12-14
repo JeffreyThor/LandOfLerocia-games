@@ -7,8 +7,8 @@
 local battleEnemies = {}
 
 local enemyOneOptions = {
-   	width = 975/3,
-   	height = 1426/5,
+   	width = 325,
+   	height = 285,
    	sheetContentWidth = 975,
    	sheetContentHeight = 1426,
    	numFrames = 13
@@ -21,10 +21,10 @@ local enemyTwoOptions = {
    	numFrames = 11
 }
 local enemyThreeOptions = {
-	width = 661,
- 	height = 585,
-   	sheetContentWidth = 661 * 3,
-   	sheetContentHeight = 585 * 5,
+	width = 325,
+ 	height = 287,
+   	sheetContentWidth = 325 * 3,
+   	sheetContentHeight = 287 * 5,
    	numFrames = 13
 }
 local enemyFourOptions = {
@@ -50,7 +50,7 @@ local bossTwoOptions = {
 }
 local bossThreeOptions = {
 	width = 325,
- 	height = 1058/3,
+ 	height = 352,
    	sheetContentWidth = 325*4,
    	sheetContentHeight = 1058,
    	numFrames = 11
@@ -129,14 +129,14 @@ local enemyTwoSequenceData = {
 local enemyThreeSequenceData = {
 	{
 		name = "idle",
-		frames={4,5,6,7,},
+		frames={5,6,7,8},
 		time = 1000,
 		loopCount = 0,
 		loopDirection = "forward"
 	},
 	{
 		name = "attack",
-		frames={8,9,10,11,12},
+		frames={9,10,11,12,13},
 		time = 500,
 		loopCount = 1,
 		loopDirection = "forward"

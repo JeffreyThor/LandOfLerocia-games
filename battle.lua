@@ -240,25 +240,61 @@ local function startBattle(level)
 				timer.performWithDelay( 2000, 
 					function()
 						audio.stop(1)
-						audio.play(soundTable["OpeningDemo"], {loops = -1})
-						player.xp = player.xp + math.sqrt(battleEnemy.level*1000)
-						player.gold = player.gold + battleEnemy.gold
-						dpad.dpadGroup.isVisible = true
 						battleGroup.isVisible = false
 						attackButton:removeEventListener( "tap", attackButtonPressed )
 						escapeButton:removeEventListener( "tap", escapeButtonPressed )
 						Runtime:removeEventListener( "enterFrame", updateStats )
+						if(level == "bossStage3") then
+							local moveTime = 3
+							audio.play(soundTable["FishingHole"])
+							mapDisplay.x = CONTENT_WIDTH/2 - map.tilewidth * player.startX * scale
+							mapDisplay.y = CONTENT_HEIGHT/2 - map.tileheight * player.startY * scale - (map.tileheight / 1.3 * scale)
+							transition.to( mapDisplay, {time=4/moveTime*1000, delay = 2000, y=mapDisplay.y-map.tileheight*4*scale, 
+								onComplete=function()
+									transition.to( mapDisplay, {time=25/moveTime*1000, x=mapDisplay.x-map.tilewidth*25*scale, 
+										onComplete=function()
+											transition.to( mapDisplay, {time=11/moveTime*1000, y=mapDisplay.y-map.tileheight*11*scale,
+												onComplete=function()
+													transition.to( mapDisplay, {time=32/moveTime*1000, x=mapDisplay.x+map.tilewidth*32*scale,
+														onComplete=function()
+															transition.to( mapDisplay, {time=15/moveTime*1000, y=mapDisplay.y-map.tileheight*15*scale,
+																onComplete=function()
+																	transition.to( mapDisplay, {time=31/moveTime*1000, x=mapDisplay.x-map.tilewidth*31*scale,
+																		onComplete=function()
+																			transition.to( mapDisplay, {time=19/moveTime*1000, y=mapDisplay.y-map.tilewidth*19*scale,
+																				onComplete=function()
+																					timer.performWithDelay( 10000, settingsScreen.quit )
+																				end
+																			})
+																		end
+																	})
+																end
+															})
+														end
+													})
+												end
+											})
+										end
+									})
+								end
+							})
+						else
+							audio.play(soundTable["OpeningDemo"], {loops = -1})
+							player.xp = player.xp + math.sqrt(battleEnemy.level*1000)
+							player.gold = player.gold + battleEnemy.gold
+							dpad.dpadGroup.isVisible = true
+							if(player.level < 10 and player.xp >= player.level * 20) then
+								levelUpText.alpha = 1
+								transition.fadeOut( levelUpText, {time=3000} )
+								player.level = player.level + 1
+								player.maxHealth = player.maxHealth + player.level * 15;
+								player.health = player.maxHealth
+								player.attack = math.pow( player.level, 2 ) * 2
+								player.xp = 0
+							end
+						end
 						battleEnemy:removeSelf()
 						battleEnemy = nil
-						if(player.xp >= player.level * 20) then
-							levelUpText.alpha = 1
-							transition.fadeOut( levelUpText, {time=3000} )
-							player.level = player.level + 1
-							player.maxHealth = player.maxHealth + player.level * 15;
-							player.health = player.maxHealth
-							player.attack = math.pow( player.level, 2 ) * 2
-							player.xp = 0
-						end
 					end)
 			else
 				timer.performWithDelay( 500, afterPlayerTurn )

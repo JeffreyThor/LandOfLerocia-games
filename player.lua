@@ -82,8 +82,8 @@ player.isSensor = true
 player.gravityScale = 0
 player.scale = scale
 player.speed = 500
-player.startX = 15
-player.startY = 10
+player.startX = 15+13
+player.startY = 10+7
 
 player.resetStats = function()
 	player.x = CONTENT_WIDTH/2;

@@ -39,16 +39,16 @@ function startNewGame(event)
 	mapDisplay.y = player.y - map.tileheight * player.startY * scale - (map.tileheight / 1.3 * scale)
 	player.x = 0 + map.tilewidth * player.startX * scale
 	player.y = 0 + map.tileheight * (player.startY+1) * scale - map.tileheight/4 * scale
-	bosses.bossOne.x = 0 + map.tilewidth * 31 * scale
-	bosses.bossOne.y = 0 + map.tileheight * 26 * scale
+	bosses.bossOne.x = 0 + map.tilewidth * (31+13) * scale
+	bosses.bossOne.y = 0 + map.tileheight * (26+7) * scale
 	bosses.bossOne:setSequence("idleRight")
 	bosses.bossOne:play()
-	bosses.bossTwo.x = 0 + map.tilewidth * 8 * scale
-	bosses.bossTwo.y = 0 + map.tileheight * 33 * scale
+	bosses.bossTwo.x = 0 + map.tilewidth * (8+13) * scale
+	bosses.bossTwo.y = 0 + map.tileheight * (33+7) * scale
 	bosses.bossTwo:setSequence("idleUp")
 	bosses.bossTwo:play()
-	bosses.bossThree.x = 0 + map.tilewidth * 42 * scale
-	bosses.bossThree.y = 0 + map.tileheight * 41 * scale
+	bosses.bossThree.x = 0 + map.tilewidth * (42+13) * scale
+	bosses.bossThree.y = 0 + map.tileheight * (41+7) * scale
 	bosses.bossThree:setSequence("idleLeft")
 	bosses.bossThree:play()
 	audio.stop(1)
@@ -75,8 +75,8 @@ function openSettings(event)
 	dpad.dpadUp.isVisible = false
 	dpad.dpadRight.isVisible = false
 	dpad.dpadDown.isVisible = false
-	dpad.aButton.isVisible = false
-	dpad.bButton.isVisible = false
+	-- dpad.aButton.isVisible = false
+	-- dpad.bButton.isVisible = false
 	dpad.textBox.isVisible = false
 	dpad.helpText.isVisible = false
 	splashGroup.isVisible = false

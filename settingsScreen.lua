@@ -230,6 +230,8 @@ settingsTable.optionsGroup = optionsGroup
 settingsTable.controlsGroup = controlsGroup
 settingsTable.creditsGroup = creditsGroup
 
+settingsTable.quit = quit
+
 return settingsTable
 
 

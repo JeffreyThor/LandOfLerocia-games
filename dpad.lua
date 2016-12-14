@@ -37,10 +37,10 @@ local textOptions = {
 -- local helpText = display.newText( dpadGroup, "", CONTENT_WIDTH/2, CONTENT_HEIGHT-60, "Breathe Fire.otf" )
 local helpText = display.newText( textOptions )
 
-local aButton = display.newCircle( dpadGroup, CONTENT_WIDTH, CONTENT_HEIGHT-80, 20 )
-aButton.fill = {type="image", filename="assets/UI/aButton.png"}
-local bButton = display.newCircle( dpadGroup, CONTENT_WIDTH-40, CONTENT_HEIGHT-30, 20 )
-bButton.fill = {type="image", filename="assets/UI/bButton.png"}
+-- local aButton = display.newCircle( dpadGroup, CONTENT_WIDTH, CONTENT_HEIGHT-80, 20 )
+-- aButton.fill = {type="image", filename="assets/UI/aButton.png"}
+-- local bButton = display.newCircle( dpadGroup, CONTENT_WIDTH-40, CONTENT_HEIGHT-30, 20 )
+-- bButton.fill = {type="image", filename="assets/UI/bButton.png"}
 local characterDisplay = display.newImage( characterGroup, "assets/UI/CharacterScreen.png", CONTENT_WIDTH/2, CONTENT_HEIGHT/2 )
 local closeCharacterDisplayButton = display.newImage( characterGroup, "assets/UI/closeButton.png", CONTENT_WIDTH/2 - characterDisplay.width/2 + 35, CONTENT_HEIGHT/2 - characterDisplay.height/2 + 35 )
 local characterDisplayPlayerImage = display.newImage( characterGroup, "assets/Sprites/png/2x/hero1/IdleFront (1).png", CONTENT_WIDTH/2-75, CONTENT_HEIGHT/2-10)
@@ -68,8 +68,8 @@ dpadRight.isVisible = false
 dpadDown.isVisible = false
 textBox.isVisible = false
 helpText.isVisible = false
-aButton.isVisible = false
-bButton.isVisible = false
+-- aButton.isVisible = false
+-- bButton.isVisible = false
 closeCharacterDisplayButton:scale(.5, .5)
 characterGroup.isVisible = false
 
@@ -83,8 +83,8 @@ local function dialog(message)
 	dpadUp.isVisible = false
 	dpadRight.isVisible = false
 	dpadDown.isVisible = false
-	aButton.isVisible = false
-	bButton.isVisible = false
+	-- aButton.isVisible = false
+	-- bButton.isVisible = false
 	helpText.text = message
 	textBox.isVisible = true
 	helpText.isVisible = true
@@ -95,8 +95,8 @@ function closeBox()
 	dpadUp.isVisible = true
 	dpadRight.isVisible = true
 	dpadDown.isVisible = true
-	aButton.isVisible = true
-	bButton.isVisible = true
+	-- aButton.isVisible = true
+	-- bButton.isVisible = true
 	textBox.isVisible = false
 	helpText.isVisible = false
 	helpText.text = ""
@@ -310,8 +310,8 @@ local function useDpad()
 	dpadUp.isVisible = true
 	dpadRight.isVisible = true
 	dpadDown.isVisible = true
-	aButton.isVisible = true
-	bButton.isVisible = true
+	-- aButton.isVisible = true
+	-- bButton.isVisible = true
 	dpadGroup.isVisible = true
 	dpadGroup.alpha = 0
 	transition.fadeIn( dpadGroup, {time = 2000} )
@@ -357,8 +357,8 @@ dpadTable.dpadDown = dpadDown
 dpadTable.dpadLeft = dpadLeft
 dpadTable.textBox = textBox
 dpadTable.helpText = helpText
-dpadTable.aButton = aButton
-dpadTable.bButton = bButton
+-- dpadTable.aButton = aButton
+-- dpadTable.bButton = bButton
 
 dpadTable.dialog = dialog
 
