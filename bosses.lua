@@ -21,8 +21,8 @@ local optionsTwo = {
 	numFrames = 16
 }
 local optionsThree = {
-	width = 590/4,
-	height = 640/4,
+	width = 147,
+	height = 160,
 	sheetContentWidth = 590,
 	sheetContentHeight = 640,
 	numFrames = 16

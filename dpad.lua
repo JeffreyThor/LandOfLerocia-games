@@ -174,6 +174,7 @@ function movePlayer()
 	player:setSequence(dpadAction)
 	player:play()
 	player:addEventListener( "collision", playerCollided )
+	audio.stop(2)
 	audio.play(soundTable["Walk"])
 	transition.to(player, {time=player.speed, x = (player.x+(xAmount*scale)),y=(player.y+(yAmount*scale))})
 	transition.to(mapDisplay, {time = player.speed, x = (mapDisplay.x - (xAmount * scale)), y = (mapDisplay.y - (yAmount * scale)),
