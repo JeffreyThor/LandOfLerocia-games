@@ -14,7 +14,6 @@ local dpadAction = nil
 local activeAction = nil
 local inGameSettings = display.newImage( dpadGroup, "assets/UI/settingsInGame.png", 0, 22 )
 local characterDisplayButton = display.newImage( dpadGroup, "assets/UI/characterImage.png", 50, 22 )
--- local dpad = display.newImage(dpadGroup, "assets/Controller/dpad.png", 20, CONTENT_HEIGHT - 64)
 local dpadLeft = display.newImage( dpadGroup, "assets/UI/leftArrow.png", 0, CONTENT_HEIGHT - 75 )
 local dpadUp = display.newImage( dpadGroup, "assets/UI/upArrow.png", 50, CONTENT_HEIGHT - 125 )
 local dpadRight = display.newImage( dpadGroup, "assets/UI/rightArrow.png", 100, CONTENT_HEIGHT - 75 )
@@ -34,13 +33,7 @@ local textOptions = {
    	height = 80,
    	align = "left"
 }
--- local helpText = display.newText( dpadGroup, "", CONTENT_WIDTH/2, CONTENT_HEIGHT-60, "Breathe Fire.otf" )
 local helpText = display.newText( textOptions )
-
--- local aButton = display.newCircle( dpadGroup, CONTENT_WIDTH, CONTENT_HEIGHT-80, 20 )
--- aButton.fill = {type="image", filename="assets/UI/aButton.png"}
--- local bButton = display.newCircle( dpadGroup, CONTENT_WIDTH-40, CONTENT_HEIGHT-30, 20 )
--- bButton.fill = {type="image", filename="assets/UI/bButton.png"}
 local characterDisplay = display.newImage( characterGroup, "assets/UI/CharacterScreen.png", CONTENT_WIDTH/2, CONTENT_HEIGHT/2 )
 local closeCharacterDisplayButton = display.newImage( characterGroup, "assets/UI/closeButton.png", CONTENT_WIDTH/2 - characterDisplay.width/2 + 35, CONTENT_HEIGHT/2 - characterDisplay.height/2 + 35 )
 local characterDisplayPlayerImage = display.newImage( characterGroup, "assets/Sprites/png/2x/hero1/IdleFront (1).png", CONTENT_WIDTH/2-75, CONTENT_HEIGHT/2-10)
@@ -68,8 +61,6 @@ dpadRight.isVisible = false
 dpadDown.isVisible = false
 textBox.isVisible = false
 helpText.isVisible = false
--- aButton.isVisible = false
--- bButton.isVisible = false
 closeCharacterDisplayButton:scale(.5, .5)
 characterGroup.isVisible = false
 
@@ -83,8 +74,6 @@ local function dialog(message)
 	dpadUp.isVisible = false
 	dpadRight.isVisible = false
 	dpadDown.isVisible = false
-	-- aButton.isVisible = false
-	-- bButton.isVisible = false
 	helpText.text = message
 	textBox.isVisible = true
 	helpText.isVisible = true
@@ -95,8 +84,6 @@ function closeBox()
 	dpadUp.isVisible = true
 	dpadRight.isVisible = true
 	dpadDown.isVisible = true
-	-- aButton.isVisible = true
-	-- bButton.isVisible = true
 	textBox.isVisible = false
 	helpText.isVisible = false
 	helpText.text = ""
@@ -196,26 +183,6 @@ function movePlayer()
 	})
 end
 
--- local function dpadTouched(event)
--- 	if (event.phase == "began") then
--- 		if (event.x > dpad.x + 10) then
--- 			dpadAction = "moveRight"
--- 		elseif (event.x < dpad.x - 10) then
--- 			dpadAction = "moveLeft"
--- 		elseif (event.y > dpad.y + 10) then
--- 			dpadAction = "moveDown"
--- 		elseif (event.y < dpad.y - 10) then
--- 			dpadAction = "moveUp"
--- 		end
-
--- 		if (activeAction == nil) then
--- 			movePlayer()
--- 		end
--- 	elseif (event.phase == "ended") then
--- 		dpadAction = nil
--- 	end
--- end
-
 local function dpadLeftTouched(event)
 	if(event.phase == "began") then
 		dpadAction = "moveLeft"
@@ -306,13 +273,10 @@ end
 local function useDpad()
 	inGameSettings.isVisible = true
 	characterDisplayButton.isVisible = true
-	-- dpad.isVisible = true
 	dpadLeft.isVisible = true
 	dpadUp.isVisible = true
 	dpadRight.isVisible = true
 	dpadDown.isVisible = true
-	-- aButton.isVisible = true
-	-- bButton.isVisible = true
 	dpadGroup.isVisible = true
 	dpadGroup.alpha = 0
 	transition.fadeIn( dpadGroup, {time = 2000} )
@@ -333,7 +297,6 @@ local function useKeyboard()
 	player:toFront()
 end
 
--- dpad:addEventListener( "touch", dpadTouched )
 dpadLeft:addEventListener( "touch", dpadLeftTouched )
 dpadUp:addEventListener( "touch", dpadUpTouched )
 dpadRight:addEventListener( "touch", dpadRightTouched )
@@ -351,15 +314,12 @@ dpadTable.gameSettings = gameSettings
 dpadTable.inGameSettings = inGameSettings
 dpadTable.characterDisplayButton = characterDisplayButton
 dpadTable.dpadGroup = dpadGroup
--- dpadTable.dpad = dpad
 dpadTable.dpadUp = dpadUp
 dpadTable.dpadRight = dpadRight
 dpadTable.dpadDown = dpadDown
 dpadTable.dpadLeft = dpadLeft
 dpadTable.textBox = textBox
 dpadTable.helpText = helpText
--- dpadTable.aButton = aButton
--- dpadTable.bButton = bButton
 
 dpadTable.dialog = dialog
 

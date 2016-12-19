@@ -16,7 +16,7 @@ background.xScale = 1.2
 audio.play(soundTable["TitleTheme"], {loops = -1})
 
 local newGame = display.newImage( splashGroup, "assets/UI/newGameButton.png", CONTENT_WIDTH/2, CONTENT_HEIGHT*(1/4) + 40 )
-local loadGame  = display.newImage( splashGroup, "assets/UI/loadGameButton.png", CONTENT_WIDTH/2, CONTENT_HEIGHT*(2/4) + 40 )
+local loadGame  = display.newImage( splashGroup, "assets/UI/loadGameButtonUnavailable.png", CONTENT_WIDTH/2, CONTENT_HEIGHT*(2/4) + 40 )
 local settings  = display.newImage( splashGroup, "assets/UI/settingsButton.png", CONTENT_WIDTH/2, CONTENT_HEIGHT*(3/4) + 40 )
 newGame.alpha = 0
 loadGame.alpha = 0
@@ -60,7 +60,6 @@ function startNewGame(event)
 	audio.play(soundTable["OpeningDemo"], {loops = -1})
 	dpad.useDpad()
 	dpad.dialog("Welcome to the Land Of Lerocia! This world is yours to explore, but be wary, there are people in this world who are dangerous. Do what you must to fend them off, but be careful. Now let your journey begin!")
-	--dpad.useKeyboard()
 	return true
 end
 
@@ -75,8 +74,6 @@ function openSettings(event)
 	dpad.dpadUp.isVisible = false
 	dpad.dpadRight.isVisible = false
 	dpad.dpadDown.isVisible = false
-	-- dpad.aButton.isVisible = false
-	-- dpad.bButton.isVisible = false
 	dpad.textBox.isVisible = false
 	dpad.helpText.isVisible = false
 	splashGroup.isVisible = false

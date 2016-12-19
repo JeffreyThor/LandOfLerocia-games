@@ -4,8 +4,6 @@
 --
 -----------------------------------------------------------------------------------------
 
--- physics.setDrawMode( "hybrid" )
-
 local options = {
    width = 326,
    height = 214,
@@ -103,18 +101,5 @@ player.resetStats = function()
 	player.bossTwoDefeated = false
 	player.bossThreeDefeated = false
 end
--- player.name = "Player"
--- player.level = 1
--- player.maxHealth = 50
--- player.health = 50
--- player.critChance = 7
--- player.missChance = 7
--- player.gold = 0
--- player.attack = math.pow( player.level, 2 ) * 2
--- player.yourTurn = false
--- player.xp = 0
-
--- player.isSleepingAllowed = false
--- player.isAwake = true
 
 return player

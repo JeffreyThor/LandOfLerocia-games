@@ -19,7 +19,8 @@ local soundTable = {
     Walk = audio.loadSound( "assets/Sounds/Walk.mp3", {channel = 2}),
     BossOne = audio.loadSound( "assets/Sounds/BossOne.mp3", {channel = 1} ),
     BossTwo = audio.loadSound( "assets/Sounds/BossTwo.mp3", {channel = 1} ),
-    BossThree = audio.loadSound( "assets/Sounds/BossThree.mp3", {channel = 1} )
+    BossThree = audio.loadSound( "assets/Sounds/BossThree.mp3", {channel = 1} ),
+    Sword = audio.loadSound( "assets/Sounds/Sword.mp3", {channel = 2} )
 }
 
 return soundTable

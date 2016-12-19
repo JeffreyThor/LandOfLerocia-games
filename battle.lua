@@ -14,8 +14,8 @@ background.y = display.contentCenterY
 background.xScale = 1.2
 
 local attackButton = display.newImage( battleGroup, "assets/Battle/attackButton.png", CONTENT_WIDTH-200, CONTENT_HEIGHT-100 )
-local abilitiesButton = display.newImage( battleGroup, "assets/Battle/abilitiesButton.png", CONTENT_WIDTH-50, CONTENT_HEIGHT-100 )
-local inventoryButton = display.newImage( battleGroup, "assets/Battle/inventoryButton.png", CONTENT_WIDTH-200, CONTENT_HEIGHT-50 )
+local abilitiesButton = display.newImage( battleGroup, "assets/Battle/abilitiesButtonUnavailable.png", CONTENT_WIDTH-50, CONTENT_HEIGHT-100 )
+local inventoryButton = display.newImage( battleGroup, "assets/Battle/inventoryButtonUnavailable.png", CONTENT_WIDTH-200, CONTENT_HEIGHT-50 )
 local escapeButton = display.newImage( battleGroup, "assets/Battle/escapeButton.png", CONTENT_WIDTH-50, CONTENT_HEIGHT-50 )
 local battleStatsDisplay = display.newImage( battleGroup, "assets/Battle/battleStatsDisplay.png", 150, 85 )
 local playerName = display.newText( battleGroup, "", 75, 25, "Breathe Fire.otf" )
@@ -49,8 +49,6 @@ enemyText:scale(2, 2)
 levelUpText:setFillColor( 0,0,0 )
 levelUpText:scale(3, 3)
 levelUpText.alpha = 0
---battleStatsDisplay.x = 150
---battleStatsDisplay.y = 85
 local battlePlayer = require("battlePlayer")
 local battleEnemies = require("battleEnemies")
 battleGroup:insert(battlePlayer)
@@ -98,7 +96,6 @@ local function startBattle(level)
 		battleEnemy = battleEnemies.startBossThree()
 		audio.play(soundTable["BossThree"], {loops = -1})
 	end
-	-- audio.play(soundTable["BattleMusic"], {loops = -1})
 	battleGroup:insert(battleEnemy)
 	battleEnemy.x = CONTENT_WIDTH-75
 	battleEnemy.y = 75
@@ -111,12 +108,6 @@ local function startBattle(level)
 	playerText:toFront()
 	print(battleEnemy.bossLevel)
 
-	-- dpad.dpadUp.isVisible = false
-	-- dpad.dpadRight.isVisible = false
-	-- dpad.dpadDown.isVisible = false
-	-- dpad.dpadLeft.isVisible = false
-	-- dpad.aButton.isVisible = false
-	-- dpad.bButton.isVisible = false
 	dpad.dpadGroup.isVisible = false
 	timer.performWithDelay( 2000, 
 		function()
@@ -128,10 +119,6 @@ local function startBattle(level)
 
 	local function enemyTurn()
 		local attackTime = 500
-		-- print(battleEnemy.level)
-		-- print(battleEnemy.health)
-		-- print(battleEnemy.critChance)
-		-- print(battleEnemy.gold)
 		local damage = battleEnemy.attack + math.random(-battleEnemy.level, battleEnemy.level)
 		if(math.random(battleEnemy.missChance) == 1) then
 			playerText.text = "Miss!"
@@ -220,6 +207,7 @@ local function startBattle(level)
 				enemyText.alpha = 1
 				transition.fadeOut( enemyText, {time=1000} )
 			end
+			audio.play(soundTable["Sword"])
 			battlePlayer:setSequence( "attack" )
 			battlePlayer:play()
 			player.yourTurn = false
@@ -304,14 +292,13 @@ local function startBattle(level)
 
 	function escapeButtonPressed()
 		if(player.yourTurn) then
-			-- dpad.dpadUp.isVisible = true
-			-- dpad.dpadRight.isVisible = true
-			-- dpad.dpadDown.isVisible = true
-			-- dpad.dpadLeft.isVisible = true
-			-- dpad.aButton.isVisible = true
-			-- dpad.bButton.isVisible = true
 			if(math.random(5) == 1) then
 				playerText.text = "Can't Escape!"
+				playerText.x = playerText.x + 50
+				timer.performWithDelay( 500, 
+					function()
+						playerText.x = playerText.x - 50
+					end)
 				playerText.alpha = 1
 				transition.fadeOut( playerText, {time=1000} )
 				player.yourTurn = false

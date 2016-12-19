@@ -27,7 +27,7 @@ creditsToSettingsButton:toFront()
 
 local optionsButton = display.newImage( settingsGroup, "assets/UI/optionsButton.png", CONTENT_WIDTH/2, CONTENT_HEIGHT*(0/4) + 40 )
 local controlsButton = display.newImage( settingsGroup, "assets/UI/controlsButton.png", CONTENT_WIDTH/2, CONTENT_HEIGHT*(1/4) + 40 )
-local saveButton = display.newImage( settingsGroup, "assets/UI/saveButton.png", CONTENT_WIDTH/2, CONTENT_HEIGHT*(2/4) + 40 )
+local saveButton = display.newImage( settingsGroup, "assets/UI/saveButtonUnavailable.png", CONTENT_WIDTH/2, CONTENT_HEIGHT*(2/4) + 40 )
 local creditsButton = display.newImage( settingsGroup, "assets/UI/creditsButton.png", CONTENT_WIDTH/2, CONTENT_HEIGHT*(3/4) + 40 )
 local quitButton = display.newImage( settingsGroup, "assets/UI/quitButton.png", CONTENT_WIDTH/2, CONTENT_HEIGHT*(3/4) + 40 )
 local backToSplashButton = display.newImage( settingsGroup, "assets/UI/backarrow.png", 0, 22 )
@@ -54,9 +54,9 @@ optionsToSettingsButton:scale(.5, .5)
 
 --Controls Group Objects
 
-local dpadImage = display.newImage(controlsGroup, "assets/Controller/dpad.png", CONTENT_WIDTH*(1/4), CONTENT_HEIGHT/2)
-local arrowKeys = display.newImage(controlsGroup, "assets/UI/arrowKeys.png", CONTENT_WIDTH*(3/4), CONTENT_HEIGHT/2)
-arrowKeys:scale( .5, .5 )
+local dpadImage = display.newImage(controlsGroup, "assets/Controller/dpad.png", CONTENT_WIDTH/2, CONTENT_HEIGHT/2)
+local controlsText = display.newText( controlsGroup, "Use the dpad for movement, and any live display buttons for interaction", CONTENT_WIDTH/2, CONTENT_HEIGHT*(3/4), "Breathe Fire.otf" )
+controlsText:setFillColor( 0,0,0 )
 local controlsToSettingsButton = display.newImage( controlsGroup, "assets/UI/backarrow.png", 0, 22 )
 controlsToSettingsButton:scale(.5, .5)
 
@@ -125,16 +125,10 @@ end
 
 local function quit()
 	audio.stop(1)
-	-- dpad.dpad.isVisible = false
 
 	splashScreen.newGame:addEventListener( "tap", startNewGame )
 	splashScreen.loadGame:addEventListener( "tap", findLoadGame )
 	splashScreen.settings:addEventListener( "tap", openSettings )
-	-- player:removeSelf()
-	-- player = nil
-	-- bosses.bossOne:removeSelf()
-	-- bosses.bossTwo:removeSelf()
-	-- bosses.bossThree:removeSelf()
 	dpad.inGameSettings.isVisible = false
 	dpad.characterDisplayButton.isVisible = false
 	saveButton.isVisible = false
