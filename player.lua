@@ -2,8 +2,11 @@
 --
 -- player.lua
 --
+-- Creates the in game player sprite (separate from the battle sprite)
+--
 -----------------------------------------------------------------------------------------
 
+-- Spritesheet options and importing spritesheet png
 local options = {
    width = 326,
    height = 214,
@@ -13,6 +16,7 @@ local options = {
 }
 local spriteSheet = graphics.newImageSheet( "assets/Sprites/png/1x/hero1/SpritePack.png", options )
 
+-- All player sequences (walking directions, idle, etc.)
 local sequenceData = {
 	{
 		name = "idleRight",
@@ -72,10 +76,12 @@ local sequenceData = {
 	}
 }
 
+-- Actual player sprite declaration
 local player = display.newSprite(spriteSheet, sequenceData)
-player:scale(scale, scale)
-local nw, nh = map.tilewidth*scale*0.5, map.tileheight*scale*0.5;
+player:scale(scale, scale) -- Global scale (for player, tiles, etc.)
+local nw, nh = map.tilewidth*scale*0.5, map.tileheight*scale*0.5; -- Custom physics body since bodies don't scale with image
 physics.addBody( player, "dynamic", {density=0.0,friction=0.0, bounce=0.0, shape={-nw+2,-nh+12,nw-2,-nh+12,nw-2,nh+8,-nw+2,nh+8}} )
+-- Set player physics information, speed, and starting location (by tile x and y)
 player.isSensor = true
 player.gravityScale = 0
 player.scale = scale
@@ -83,6 +89,7 @@ player.speed = 500
 player.startX = 15+13
 player.startY = 10+7
 
+-- Return player stats to default (on start of new game)
 player.resetStats = function()
 	player.x = CONTENT_WIDTH/2;
 	player.y = CONTENT_HEIGHT/2;

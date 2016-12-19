@@ -2,6 +2,8 @@
 --
 -- bosses.lua
 --
+-- The boss sprites displayed in the map for the player to encounter
+--
 -----------------------------------------------------------------------------------------
 
 local bossTable = {}

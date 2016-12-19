@@ -8,11 +8,12 @@ local battleTable = {}
 
 local battleGroup = display.newGroup()
 
+-- Grassy battle background import and scaling
 local background = display.newImageRect( battleGroup, "assets/Backgrounds/battleBackground.png", CONTENT_WIDTH, CONTENT_HEIGHT )
 background.x = display.contentCenterX
 background.y = display.contentCenterY
 background.xScale = 1.2
-
+-- All battle buttons and stats
 local attackButton = display.newImage( battleGroup, "assets/Battle/attackButton.png", CONTENT_WIDTH-200, CONTENT_HEIGHT-100 )
 local abilitiesButton = display.newImage( battleGroup, "assets/Battle/abilitiesButtonUnavailable.png", CONTENT_WIDTH-50, CONTENT_HEIGHT-100 )
 local inventoryButton = display.newImage( battleGroup, "assets/Battle/inventoryButtonUnavailable.png", CONTENT_WIDTH-200, CONTENT_HEIGHT-50 )
@@ -31,6 +32,7 @@ local enemyHealth = display.newText( battleGroup, "", 230, 115, "Breathe Fire.ot
 local enemyGold = display.newText( battleGroup, "", 215, 137, "Breathe Fire.otf" )
 local enemyText = display.newText( battleGroup, "", CONTENT_WIDTH-135, 50, "Breathe Fire.otf" )
 local levelUpText = display.newText( "Level Up!", CONTENT_WIDTH/2, CONTENT_HEIGHT/2, "Breathe Fire.otf" )
+-- Scaling and coloring
 battleStatsDisplay:scale(.5, .5)
 playerName:setFillColor( 0,0,0 )
 playerLevel:setFillColor( 0,0,0 )
@@ -49,8 +51,8 @@ enemyText:scale(2, 2)
 levelUpText:setFillColor( 0,0,0 )
 levelUpText:scale(3, 3)
 levelUpText.alpha = 0
-local battlePlayer = require("battlePlayer")
-local battleEnemies = require("battleEnemies")
+local battlePlayer = require("battlePlayer") -- To have access to battle player information
+local battleEnemies = require("battleEnemies") -- To have access to battle enemy information
 battleGroup:insert(battlePlayer)
 battlePlayer.x = 75
 battlePlayer.y = CONTENT_HEIGHT-75
@@ -62,6 +64,7 @@ battlePlayer:scale(.5, .5)
 
 battleGroup.isVisible = false
 
+-- Update displayed stats of both player and enemy
 local function updateStats()
 	playerName.text = player.name
 	playerLevel.text = player.level
@@ -75,6 +78,7 @@ local function updateStats()
 	enemyGold.text = battleEnemy.gold
 end
 
+-- Called at the start of a battle to set appropriate music, enemy, etc.
 local function startBattle(level)
 	audio.stop(1)
 	if(level == "battleStage1") then
@@ -106,7 +110,6 @@ local function startBattle(level)
 	playerText.alpha = 0
 	enemyText:toFront()
 	playerText:toFront()
-	print(battleEnemy.bossLevel)
 
 	dpad.dpadGroup.isVisible = false
 	timer.performWithDelay( 2000, 
@@ -117,6 +120,7 @@ local function startBattle(level)
 	battlePlayer:play()
 	player.yourTurn = true
 
+	-- Enemy attacks player after players turn
 	local function enemyTurn()
 		local attackTime = 500
 		local damage = battleEnemy.attack + math.random(-battleEnemy.level, battleEnemy.level)
@@ -141,6 +145,7 @@ local function startBattle(level)
 		end
 		battleEnemy:setSequence( "attack" )
 		battleEnemy:play()
+		-- If the enemy has killed the player (music, sequences, moving player back home, etc.)
 		if(player.health <= 0) then
 			player.health = 0
 			player:setSequence( "idleDown" )
@@ -179,19 +184,22 @@ local function startBattle(level)
 		end
 	end
 
+	-- For setting player to idle and letting enemy attack back
 	local function afterPlayerTurn()
 		battlePlayer:setSequence( "idle" )
 		battlePlayer:play()
 		enemyTurn()
 	end
-
+	-- Player attacks enemy
 	function attackButtonPressed()
 		if(player.yourTurn) then
 			local damage = player.attack + math.random(-player.level, player.level)
+			-- Player misses
 			if(math.random(player.missChance) == 1) then
 				enemyText.text = "Miss!"
 				enemyText.alpha = 1
 				transition.fadeOut( enemyText, {time=1000} )
+			-- Player hits ciritcal hit
 			elseif(math.random(player.critChance) == 1) then
 				battleEnemy.health = battleEnemy.health - damage*2
 				battleEnemy:setSequence( "hurt" )
@@ -199,6 +207,7 @@ local function startBattle(level)
 				enemyText.text = "-"..damage*2
 				enemyText.alpha = 1
 				transition.fadeOut( enemyText, {time=1000} )
+			-- Basic attack
 			else
 				battleEnemy.health = battleEnemy.health - damage
 				battleEnemy:setSequence( "hurt" )
@@ -211,6 +220,7 @@ local function startBattle(level)
 			battlePlayer:setSequence( "attack" )
 			battlePlayer:play()
 			player.yourTurn = false
+			-- Removes boss on the map if defeated
 			if(battleEnemy.health <= 0) then
 				if(level == "bossStage1") then
 					bosses.bossOne.isVisible = false
@@ -232,6 +242,7 @@ local function startBattle(level)
 						attackButton:removeEventListener( "tap", attackButtonPressed )
 						escapeButton:removeEventListener( "tap", escapeButtonPressed )
 						Runtime:removeEventListener( "enterFrame", updateStats )
+						-- Plays ending map flythrough after beating the final boss
 						if(level == "bossStage3") then
 							local moveTime = 3
 							audio.play(soundTable["FishingHole"])
@@ -289,7 +300,7 @@ local function startBattle(level)
 			end
 		end
 	end
-
+	-- Player tries to flee from the battle
 	function escapeButtonPressed()
 		if(player.yourTurn) then
 			if(math.random(5) == 1) then
@@ -303,6 +314,7 @@ local function startBattle(level)
 				transition.fadeOut( playerText, {time=1000} )
 				player.yourTurn = false
 				timer.performWithDelay( 500, afterPlayerTurn )
+			-- If flee from boss battle, move player away from the boss to prevent starting fight again or allowing player to walk through boss
 			else
 				if(battleEnemy.bossLevel == 1) then
 					player.x = player.x + map.tilewidth * scale

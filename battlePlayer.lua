@@ -2,6 +2,8 @@
 --
 -- battlePlayer.lua
 --
+-- The player sprite displayed during a battle scene
+--
 -----------------------------------------------------------------------------------------
 
 local options = {

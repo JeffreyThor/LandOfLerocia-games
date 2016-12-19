@@ -2,6 +2,8 @@
 --
 -- soundTable.lua
 --
+-- All music and sounds used preloaded to be used throughout the game 
+--
 -----------------------------------------------------------------------------------------
 
 local soundTable = {

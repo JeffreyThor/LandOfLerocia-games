@@ -2,10 +2,13 @@
 --
 -- settingsScreen.lua
 --
+-- Settings display that can be opened on splash or in game
+--
 -----------------------------------------------------------------------------------------
 
 local settingsTable = {}
 
+-- Image, button, and group declarations (and their visibilities)
 local background = display.newImageRect( "assets/UI/paperBackground.png", CONTENT_WIDTH, CONTENT_HEIGHT )
 local creditsToSettingsButton = display.newImage( "assets/UI/backarrow.png", 0, 22 )
 background.xScale = 1.2

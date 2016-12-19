@@ -2,6 +2,8 @@
 --
 -- splashScreen.lua
 --
+-- Initial launch screen
+--
 -----------------------------------------------------------------------------------------
 
 local splashTable = {}
@@ -26,6 +28,7 @@ transition.fadeIn( newGame, { delay = 2000, time=2000 } )
 transition.fadeIn( loadGame, { delay = 2000, time=2000 } )
 transition.fadeIn( settings, { delay = 2000, time=2000 } )
 
+-- Called when new game button is slected, resets player stats and sets up map, player, and enemies to correct locations
 function startNewGame(event)
 	player.resetStats()
 	newGame:removeEventListener( "tap", startNewGame )
@@ -63,10 +66,12 @@ function startNewGame(event)
 	return true
 end
 
+-- TO-DO
 function findLoadGame(event)
 	
 end
 
+-- Open settings screen (specified for settings from splash, different than in game settings)
 function openSettings(event)
 	dpad.dpadGroup.isVisible = false
 	dpad.gameSettings.isVisible = false
@@ -82,10 +87,11 @@ function openSettings(event)
 	return true
 end
 
+-- Button event listeners
 newGame:addEventListener( "tap", startNewGame )
 loadGame:addEventListener( "tap", findLoadGame )
 settings:addEventListener( "tap", openSettings )
-
+-- Store buttons and groups in splash table
 splashTable.newGame = newGame
 splashTable.loadGame = loadGame
 splashTable.settings = settings

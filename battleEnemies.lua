@@ -2,6 +2,8 @@
 --
 -- battleEnemies.lua
 --
+-- All stats and sequences for each enemy type
+--
 -----------------------------------------------------------------------------------------
 
 local battleEnemies = {}
@@ -281,6 +283,7 @@ local bossThreeSequenceData = {
 	},
 }
 
+-- Returns a random enemy from stage one to battle against
 local function randomFromLevelOne()
 	local random = math.random( 2 )
 	if(random == 1) then
@@ -309,7 +312,7 @@ local function randomFromLevelOne()
 		return enemy
 	end
 end
-
+-- Returns a random enemy from stage two to battle against
 local function randomFromLevelTwo()
 	local random = math.random( 3 )
 	if(random == 1) then
@@ -350,7 +353,7 @@ local function randomFromLevelTwo()
 		return enemy
 	end
 end
-
+-- Returns a random enemy from stage 3 to battle against
 local function randomFromLevelThree()
 	local random = math.random( 4 )
 	if(random == 1) then
@@ -403,7 +406,7 @@ local function randomFromLevelThree()
 		return enemy
 	end
 end
-
+-- Returns first boss
 local function startBossOne()
 	local boss = display.newSprite( bossOneSpriteSheet, bossOneSequenceData )
 	boss.name = "Archer"
@@ -418,7 +421,7 @@ local function startBossOne()
     boss.xp = boss.level * 50
 	return boss
 end
-
+-- Returns second boss
 local function startBossTwo()
 	local boss = display.newSprite( bossTwoSpriteSheet, bossTwoSequenceData )
 	boss.name = "Goblin King"
@@ -433,7 +436,7 @@ local function startBossTwo()
     boss.xp = boss.level * 50
 	return boss
 end
-
+-- Returns third and final boss
 local function startBossThree()
 	local boss = display.newSprite( bossThreeSpriteSheet, bossThreeSequenceData )
 	boss.name = "Assassin"
@@ -448,7 +451,7 @@ local function startBossThree()
     boss.xp = boss.level * 50
 	return boss
 end
-
+-- Store functions into battle enemies table
 battleEnemies.randomFromLevelOne = randomFromLevelOne
 battleEnemies.randomFromLevelTwo = randomFromLevelTwo
 battleEnemies.randomFromLevelThree = randomFromLevelThree
